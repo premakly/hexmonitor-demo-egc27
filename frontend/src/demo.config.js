@@ -9,5 +9,5 @@ export const DEMO_DEFAULTS = {
   // cells; size null opens the smallest size. If the vessel has no gap of
   // that size, the first gap of the list is opened instead.
   vessel: 538009058,
-  size: null
+  size: 8
 }
