@@ -32,7 +32,7 @@ model, no GPU. Everything shown was produced beforehand by the scripts in
 
 ## Online
 
-The demo is published on GitHub Pages: **https://<account>.github.io/hexmonitor-demo-egc27/**.
+The demo is published on GitHub Pages: **https://premakly.github.io/hexmonitor-demo-egc27/**.
 Pages serves static files only, so the workflow in `.github/workflows/pages.yml`
 exports every answer of the backend as JSON (`python -m egc27demo.export_static`)
 and builds the interface to read them (`VITE_STATIC=1`). It runs the tests, then
