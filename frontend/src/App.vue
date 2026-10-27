@@ -14,7 +14,7 @@
     </header>
 
     <ExperimentView
-      :api="api" :basemap="basemap" :grayscale="grayscale"
+      :api="api" :basemap="basemap" :grayscale="grayscale" :initial-gap="initialGap"
       @update:basemap="setBasemap" @update:grayscale="setGrayscale"
     />
   </div>
@@ -24,45 +24,28 @@
 import { ref } from 'vue'
 
 import ExperimentView from './components/ExperimentView.vue'
+import { DEMO_DEFAULTS } from './demo.config.js'
 import { createApi } from './lib/api.js'
-import { DEFAULT_BASEMAP, basemapById } from './lib/basemaps.js'
+import { basemapById } from './lib/basemaps.js'
 
 const props = defineProps({
-  api: { type: Object, default: () => createApi() }
+  api: { type: Object, default: () => createApi() },
+  defaults: { type: Object, default: () => DEMO_DEFAULTS }
 })
 const api = props.api
 
-// The base map is a viewer's preference: remembered in this browser only.
-const STORAGE = { basemap: 'egc27demo.basemap', grayscale: 'egc27demo.grayscale' }
-
-function stored(key, fallback) {
-  try {
-    const value = localStorage.getItem(key)
-    return value === null ? fallback : JSON.parse(value)
-  } catch (e) {
-    return fallback
-  }
-}
-
-function remember(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value))
-  } catch (e) {
-    // private browsing or storage full: the choice simply is not remembered
-  }
-}
-
-const basemap = ref(basemapById(stored(STORAGE.basemap, DEFAULT_BASEMAP)).id)
-const grayscale = ref(Boolean(stored(STORAGE.grayscale, true)))
+// Every arrival starts from the demo's own base map: a visitor may change it
+// while browsing, but the choice is deliberately not remembered.
+const basemap = ref(basemapById(props.defaults.basemap).id)
+const grayscale = ref(Boolean(props.defaults.grayscale))
+const initialGap = { vessel: props.defaults.vessel ?? null, size: props.defaults.size ?? null }
 
 function setBasemap(id) {
   basemap.value = basemapById(id).id
-  remember(STORAGE.basemap, basemap.value)
 }
 
 function setGrayscale(on) {
   grayscale.value = Boolean(on)
-  remember(STORAGE.grayscale, grayscale.value)
 }
 
 defineExpose({ basemap, grayscale })

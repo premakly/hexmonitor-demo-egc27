@@ -79,14 +79,16 @@ import ExperimentReasoning from './ExperimentReasoning.vue'
 const props = defineProps({
   api: { type: Object, required: true },
   basemap: { type: String, default: 'carto-dark' },
-  grayscale: { type: Boolean, default: true }
+  grayscale: { type: Boolean, default: true },
+  // The trajectory to open first: { vessel: MMSI, size: cells or null }.
+  initialGap: { type: Object, default: null }
 })
 
 // The base map is the app's own setting, shared with the Map view: the
 // choice is passed up rather than kept here, so both views stay in step.
 defineEmits(['update:basemap', 'update:grayscale'])
 
-const exp = createExperimentStore(props.api)
+const exp = createExperimentStore(props.api, { initialGap: props.initialGap })
 
 function downloadGaps() {
   const blob = new Blob([exp.gapsCsv()], { type: 'text/csv' })

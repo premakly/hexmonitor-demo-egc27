@@ -2,6 +2,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import App from '../src/App.vue'
+import { DEMO_DEFAULTS } from '../src/demo.config.js'
 import { createApi } from '../src/lib/api.js'
 import { fakeApi } from './experimentFixtures.js'
 
@@ -19,18 +20,42 @@ describe('App', () => {
     expect(wrapper.findAll('.gap-row')).toHaveLength(2)
   })
 
-  it('remembers the base map chosen, in this browser', async () => {
-    const wrapper = mount(App, { props: { api: fakeApi() } })
+  it('arrives on the satellite base map, in greys, whatever was chosen on a previous visit', async () => {
+    const first = mount(App, { props: { api: fakeApi() } })
     await flushPromises()
-    await wrapper.findAll('.basemap-option').find(o => o.text() === 'Light').trigger('click')
+    await first.findAll('.basemap-option').find(o => o.text() === 'Light').trigger('click')
+    expect(first.vm.basemap).toBe('carto-light')
 
-    expect(wrapper.vm.basemap).toBe('carto-light')
-    expect(mount(App, { props: { api: fakeApi() } }).vm.basemap).toBe('carto-light')
+    const again = mount(App, { props: { api: fakeApi() } })
+    expect(again.vm.basemap).toBe('esri-satellite')
+    expect(again.vm.grayscale).toBe(true)
   })
 
-  it('falls back to the default base map when the remembered one is unknown', () => {
-    localStorage.setItem('egc27demo.basemap', JSON.stringify('gone'))
-    expect(mount(App, { props: { api: fakeApi() } }).vm.basemap).toBe('carto-dark')
+  it('opens the configured vessel on arrival', async () => {
+    const wrapper = mount(App, { props: { api: fakeApi(), defaults: { ...DEMO_DEFAULTS, vessel: 222 } } })
+    await flushPromises()
+
+    expect(wrapper.find('.gap-row.current').text()).toContain('222')
+  })
+
+  it('opens the configured gap size when there is one', async () => {
+    const wrapper = mount(App, { props: { api: fakeApi(), defaults: { ...DEMO_DEFAULTS, vessel: 111, size: 4 } } })
+    await flushPromises()
+
+    expect(wrapper.find('.size-select').element.value).toBe('4')
+    expect(wrapper.find('.gap-row.current').text()).toContain('111')
+  })
+
+  it('falls back to the first gap when the configured vessel is not in the data', async () => {
+    const wrapper = mount(App, { props: { api: fakeApi(), defaults: { ...DEMO_DEFAULTS, vessel: 999, size: 8 } } })
+    await flushPromises()
+
+    expect(wrapper.find('.size-select').element.value).toBe('2')
+    expect(wrapper.find('.gap-row.current').text()).toContain('111')
+  })
+
+  it('ships with the satellite base map in greys and vessel 538009058', () => {
+    expect(DEMO_DEFAULTS).toMatchObject({ basemap: 'esri-satellite', grayscale: true, vessel: 538009058 })
   })
 })
 

@@ -7,7 +7,7 @@ import { computed, ref, shallowRef } from 'vue'
 import { boundsOf } from './lib/geo.js'
 import { experimentLayers, gapTableColumns, highlightLayer, toCsv } from './lib/experiment.js'
 
-export function createExperimentStore(api) {
+export function createExperimentStore(api, { initialGap = null } = {}) {
   const overview = shallowRef(null)
   const overviewError = ref(null)
   const size = ref(null)
@@ -53,13 +53,16 @@ export function createExperimentStore(api) {
       return
     }
     enabled.value = [...overview.value.methods]
-    size.value = overview.value.sizes[0] ?? null
-    await loadGaps({ selectFirst: true })
+    const sizes = overview.value.sizes
+    const wanted = initialGap && initialGap.size
+    size.value = sizes.includes(wanted) ? wanted : (sizes[0] ?? null)
+    await loadGaps({ selectFirst: true, prefer: initialGap && initialGap.vessel })
   }
 
   // A later request supersedes an earlier one still in flight: switching
   // filters quickly must not let a slow, stale answer overwrite a newer one.
-  async function loadGaps({ selectFirst = false } = {}) {
+  // `prefer`: a vessel (MMSI) whose gap is opened rather than the first one.
+  async function loadGaps({ selectFirst = false, prefer = null } = {}) {
     const token = ++gapsRequest
     gapsLoading.value = true
     try {
@@ -75,7 +78,10 @@ export function createExperimentStore(api) {
       if (token === gapsRequest) gapsLoading.value = false
     }
     const stillListed = gaps.value.some(g => g.gap_id === selectedId.value)
-    if ((selectFirst || !stillListed) && gaps.value.length) await select(gaps.value[0].gap_id)
+    const preferred = prefer !== null && prefer !== undefined
+      ? gaps.value.find(g => Number(g.mmsi) === Number(prefer))
+      : null
+    if ((selectFirst || !stillListed) && gaps.value.length) await select((preferred || gaps.value[0]).gap_id)
     else if (!gaps.value.length) clearSelection()
   }
 
