@@ -1,0 +1,6 @@
+# Demo backend (replay only: no database, no language model)
+fastapi>=0.115
+uvicorn>=0.30
+pandas>=2.2
+pyarrow>=16
+h3>=4.1

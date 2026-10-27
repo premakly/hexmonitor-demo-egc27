@@ -1,0 +1,16 @@
+{
+  "method": "hexa",
+  "size_cells": 4,
+  "config_hash": "33a262e2dbff",
+  "params": {
+    "model": "qwen-vista:latest",
+    "walker": {
+      "max_candidates": 3,
+      "max_scenarios": 5
+    },
+    "cache_key": "c35db48e0566"
+  },
+  "gaps": 40,
+  "ok": 38,
+  "created_at": "2026-10-16T23:15:12.739121+00:00"
+}

@@ -1,0 +1,70 @@
+{
+  "created_at": "2026-10-19T08:47:14.671367+00:00",
+  "config_hash": "20b726158a10",
+  "dataset_hash": "b8f026e687b0",
+  "sizes_cells": [
+    2,
+    4,
+    8
+  ],
+  "context_cells": 5,
+  "counts": {
+    "gaps": 120,
+    "truth_points": 727,
+    "skipped": []
+  },
+  "summary_medians": [
+    {
+      "level": "difficile",
+      "size_cells": 2,
+      "n": 20,
+      "points": 3.0,
+      "duration_h": 0.81,
+      "length_km": 5.58
+    },
+    {
+      "level": "difficile",
+      "size_cells": 4,
+      "n": 20,
+      "points": 5.5,
+      "duration_h": 1.48,
+      "length_km": 11.79
+    },
+    {
+      "level": "difficile",
+      "size_cells": 8,
+      "n": 20,
+      "points": 13.0,
+      "duration_h": 2.76,
+      "length_km": 18.68
+    },
+    {
+      "level": "facile",
+      "size_cells": 2,
+      "n": 20,
+      "points": 2.0,
+      "duration_h": 0.55,
+      "length_km": 11.96
+    },
+    {
+      "level": "facile",
+      "size_cells": 4,
+      "n": 20,
+      "points": 4.0,
+      "duration_h": 0.82,
+      "length_km": 18.87
+    },
+    {
+      "level": "facile",
+      "size_cells": 8,
+      "n": 20,
+      "points": 8.0,
+      "duration_h": 1.67,
+      "length_km": 34.93
+    }
+  ],
+  "files": {
+    "gaps": "498503123f05",
+    "truth": "abe312940e44"
+  }
+}

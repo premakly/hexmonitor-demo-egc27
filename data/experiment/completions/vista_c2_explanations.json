@@ -1,0 +1,1232 @@
+{
+ "205128000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 -> vb_-4308594150008066823 [label=\"w=3\"], vb_-4891559821731194286 -> vb_-6811307535535622227 [label=\"w=3\"], vb_-4891559821731194286 -> vb_-7359702541752298908 [label=\"w=1\"], vb_-4891559821731194286 -> vb_-1997747338603059132 [label=\"w=1\"]. These edges indicate a strong connection between the selected movement and the other movements, suggesting a consistent pattern.",
+   "justification": "The selected movement aligns with the boundary movement patterns, showing a stable speed, slight turns to the west, and slight heading fluctuations. The vessel's static attributes (Fishing, location: England, United Kingdom, draught: [0, 2) m, length: [0, 50) m, width: [5, 10) m) are consistent with the movement patterns observed in the boundary segments. The vessel's behavior of making slight adjustments to its course and heading, as seen in the incomplete AIS record sequence, supports the chosen movement.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 80%. This is calculated based on the fact that the behavior pattern described (stable speed, slight course change, slight heading fluctuation, and turning or maneuvering) aligns well with the linear interpolation method used by the function. The function assumes a linear path between the start and end points, which is suitable for a vessel maintaining a consistent speed with slight adjustments. The duration of the behavior pattern (15300~15350 seconds) also fits well with the function's ability to interpolate intermediate positions based on time intervals. The probability is calculated as follows: Given the behavior pattern, the function's linear interpolation method has a 75% match with the vessel's movement, and considering the slight heading fluctuations, the probability increases to 80%.\n\n2. The characteristics of this function and its degree of matching with the current context are as follows: The function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. This method is well-suited for the behavior pattern described, as the vessel is maintaining a consistent speed with slight adjustments, which can be approximated by a linear path. The function's speed calculation in latitude and longitude directions is directly proportional to the time intervals, making it a reliable choice for imputing missing positions.",
+   "reasoning": "This function technically fits the kinematic requirements because it assumes a linear path between the start and end points, which is suitable for a vessel maintaining a consistent speed with slight adjustments. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, which aligns well with the behavior pattern of the vessel."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing boat operating in the vicinity of England, United Kingdom, is exhibiting a stable speed and making slight turns to the west. This behavior is typical for a fishing vessel navigating through potentially complex coastal waters, where slight adjustments to the course are common to avoid obstacles or to follow fishing grounds. The slight heading fluctuations suggest the vessel is making minor maneuvers, possibly to maintain its position relative to the fishing area or to avoid other maritime traffic. Given the spatial context of the United Kingdom, such maneuvers are expected as the vessel navigates through the intricate coastline and potential traffic patterns. \n\nKey alternatives, such as a vessel maintaining a straight course or significantly increasing or decreasing speed, are less likely given the stable speed and slight course changes observed. The vessel's static attributes, including its small size and fishing nature, further support the typical behavior of making slight adjustments to its course and heading. Therefore, the selected behavior is consistent with the operational needs of a fishing vessel in the area.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "205316000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 [w=7] -> vs_draught_[12, +∞) m, vb_-4891559821731194286 [w=5] -> vs_length_[0, 50) m, vb_-4891559821731194286 [w=2] -> vs_width_[5, 10) m. These edges indicate a strong support for movement vb_-4891559821731194286, which aligns with the vessel's static attributes.",
+   "justification": "The boundary movement patterns show a slight turn to the west and slight heading fluctuation, which are consistent with the selected movement. The incomplete AIS record sequence also indicates the vessel is making small adjustments to its course and heading, which supports the chosen movement. The duration of the movement (15300~15350) also fits within the gap period, ensuring temporal consistency.",
+   "resolution": "The model answered '2', read as index 2 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel operating in the Le Havre area of France, is exhibiting a behavior that is typical for vessels in this context. Given the static attributes of the vessel, such as its under way status, unknown hazardous cargo, and the specific spatial context of Le Havre, the observed behavior of a slight turn to the west with stable speed and minor heading fluctuations aligns with common maneuvers for fishing operations. The vessel is likely adjusting its course to navigate through the harbor or to respond to local fishing conditions. This behavior can be expected given the dynamic nature of fishing activities and the need to avoid other vessels or navigate through narrow channels. The slight course changes and heading fluctuations are consistent with the vessel making small adjustments to its position, which is a typical maneuvering operation for a fishing vessel in this area. Other alternatives, such as emergency maneuvers or large-scale course changes, can be ruled out based on the stable speed and minor heading variations observed. The duration of the movement (15300~15350) also fits within the expected operational timeframe for such maneuvers.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "205336000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [
+    {
+     "node": "vs_hazardous_cargo_unknown -> vb_-4891559821731194286",
+     "weight": 10.0
+    },
+    {
+     "node": "vs_vessel_type_Fishing -> vb_-4891559821731194286",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_draught_[12, +∞) m -> vb_-4891559821731194286",
+     "weight": 7.0
+    },
+    {
+     "node": "vs_length_[0, 50) m -> vb_-4891559821731194286",
+     "weight": 5.0
+    }
+   ],
+   "support_text": "vs_hazardous_cargo_unknown -> vb_-4891559821731194286 [w=10], vs_vessel_type_Fishing -> vb_-4891559821731194286 [w=5], vs_draught_[12, +∞) m -> vb_-4891559821731194286 [w=7], vs_length_[0, 50) m -> vb_-4891559821731194286 [w=5], vs_width_[5, 10) m -> vb_-4891559821731194286 [w=2]. These edges indicate a strong connection between the vessel's attributes and the selected movement, supporting its plausibility.",
+   "justification": "The selected movement (vb_-4891559821731194286) aligns with the boundary movement patterns, which show a stable speed, slight course change to the west, and slight heading fluctuation. The vessel is engaged in fishing, and the movement pattern reflects a series of small adjustments to its course, which is consistent with the vessel's likely need to navigate through a narrow passage or avoid obstacles. The duration of the movement (15300~15350) also fits within the timeframe of the incomplete AIS record sequence, where the vessel is observed making similar adjustments in its course and heading.",
+   "resolution": "The model answered '4', read as index 4 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the DOT graph where the function `vf_-580393894883629940` has a weight of 5, indicating a strong association with the behavior pattern `vb_-4891559821731194286`. The calculation of the weight proportion is as follows: \\( \\frac{5}{5} = 1 \\), which translates to 100% probability.\n2. The characteristics of this function include a linear interpolation approach, which assumes a straight path between the start and end points. This function is well-suited for the behavior pattern described, as the vessel is maintaining a consistent speed and making a slight turn to the west, which can be approximated by a linear path. The slight fluctuations in heading can be managed by the function's linear interpolation, making it a suitable choice.",
+   "reasoning": "This function technically fits the kinematic requirements because it assumes a linear path between the start and end points, which is a reasonable approximation for a vessel maintaining a consistent speed and making a slight turn. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, which aligns with the behavior pattern of the vessel."
+  },
+  "explanation": {
+   "operational": "The vessel, being a fishing boat engaged in operations in the waters around Ostend, West Flanders, Belgium, is likely making small adjustments to its course and heading to navigate through a narrow passage or avoid obstacles. This behavior is typical in such areas, where vessels often need to make slight turns and adjustments to maintain their fishing activities. The slight fluctuations in heading and the stable speed profile suggest that the vessel is carefully maneuvering to avoid potential hazards. This behavior is not uncommon in coastal waters where vessels must navigate through tight spaces or avoid other maritime traffic. The vessel's intent to turn or maneuver, as indicated by the slight course change and heading fluctuation, aligns with the need to adapt to the local maritime environment. Other alternatives, such as a vessel maintaining a straight course or making significant changes, are less likely given the described behavior and the spatial context of the area, which is known for its complex maritime traffic and narrow channels.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "224009240_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4308594150008066823",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making small adjustments in direction)",
+    "intent": "turning or maneuvering (the vessel is likely making a turn or performing a maneuver to the west)",
+    "duration": "13350~13400"
+   },
+   "support": [],
+   "support_text": "vb_-4308594150008066823 [w=4, w=8, w=5, w=3, w=3, w=2] are the most informative edges, with high weights indicating strong support for this movement. These edges connect the vessel's static attributes (navigation_status: Engaged in Fishing, vessel_type: Fishing) to the behavior pattern, suggesting a high likelihood of this movement.",
+   "justification": "The boundary movement patterns indicate a slight turn to the west, which is consistent with the selected movement's course_change. The static attributes of the vessel (Engaged in Fishing, small dimensions) align with the fishing vessel's typical behavior of making small adjustments to its course while engaged in fishing activities. The gap's boundary conditions also support this, as the vessel's path continues to show a gradual westward turn, matching the selected movement's pattern.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4308594150008066823. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 70%. This is calculated based on the fact that the behavior pattern indicates a stable speed with slight fluctuations in course and heading, which aligns well with the linear interpolation method used by the selected function. The function assumes a linear path between the start and end points, which is suitable for the slight course changes and heading fluctuations observed. The calculation of this probability is based on the observed consistency in speed (sog) and the slight variations in course (cog) and heading (rot) over the given duration. The edge weights in the DOT graph indicate a higher association frequency (w=1) for this function, suggesting it is more suitable for the given behavior pattern.\n2. The probability that the selected function can handle the specific speed/course/heading characteristics is 80%. This is supported by the fact that the function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. Given the stable speed profile (sog) and slight course/heading changes, the linear interpolation method will accurately estimate the missing positions. The calculation of this probability is based on the consistent speed and the slight variations in course and heading, which are well-handled by the linear interpolation method.",
+   "reasoning": "The selected function (ID 1) is technically suitable for the kinematic requirements because it assumes a linear path between the start and end points, which is appropriate for the slight course changes and heading fluctuations observed in the behavior pattern. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, which aligns well with the stable speed profile and slight variations in course and heading."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a small fishing vessel engaged in fishing activities, is making a slight turn to the west. This behavior is typical for a fishing vessel navigating through a potentially complex area, such as a harbor entrance or a narrow channel, where small adjustments are necessary to avoid obstacles or maintain a safe course. The slight fluctuations in heading and the stable speed profile indicate that the vessel is carefully maneuvering, likely to avoid hazards or to align with local navigation rules. This behavior is not inconsistent with standard fishing operations, but the specific spatial context (such as the presence of other vessels or navigational aids) is not provided, making it difficult to definitively align this behavior with a specific regulatory rule. Key alternatives, such as a vessel maintaining a straight course or significantly altering its speed, can be ruled out based on the observed behavior, which shows a controlled and cautious maneuvering pattern.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "224181290_c2": {
+  "status": "failed",
+  "behaviour": null,
+  "function": null,
+  "explanation": null
+ },
+ "224377000_c2": {
+  "status": "failed",
+  "behaviour": null,
+  "function": null,
+  "explanation": null
+ },
+ "227141900_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\"] -> vs_hazardous_cargo_unknown [label=\"w=10\"], vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\"] -> vs_vessel_type_Fishing [label=\"w=5\"], vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\"] -> vs_draught_[12, +∞) m [label=\"w=7\"], vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\"] -> vs_length_[0, 50) m [label=\"w=5\"], vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\"] -> vs_width_[5, 10) m [label=\"w=2\"]. These edges provide strong support as they indicate that the vessel is engaged in a maneuvering operation, which aligns with the boundary movement patterns.",
+   "justification": "The contextual static attributes confirm that the vessel is a fishing vessel operating in the United Kingdom, which is consistent with the behavior of turning or maneuvering. The AIS record sequence shows a series of small adjustments in course and heading, which is consistent with the selected movement pattern. The vessel's speed is stable, and it is making slight turns to the west, which is also consistent with the boundary movement patterns.",
+   "resolution": "The model answered '4', read as index 4 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the calculation of weight proportions, where the weight w=5 indicates a strong association between the behavior pattern and the function. The behavior pattern described includes a stable speed, slight course changes, and slight heading fluctuations, which aligns well with the linear interpolation approach used by the function. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, making it suitable for the given movement pattern.\n2. The characteristics of this function include a linear path assumption between start and end points, which matches the behavior pattern of stable speed and slight course changes. The function's simplicity and the fact that it does not assume any complex movement patterns make it robust for imputing missing values in this context.",
+   "reasoning": "This function technically fits the kinematic requirements because it assumes a linear path, which is consistent with the stable speed and slight course changes observed in the behavior pattern. The function's simplicity ensures that it can handle the slight heading fluctuations and course changes effectively."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel operating in the United Kingdom, is engaged in a series of small adjustments to its course and heading, indicating it is turning or maneuvering towards the west. This behavior is typical in fishing operations, where vessels frequently make slight turns and adjustments to their course to navigate through the waters and locate fishing grounds. The vessel's static attributes, such as its fishing nature and the location in England, United Kingdom, support this maneuvering behavior. Given the stable speed and slight course changes, the vessel is likely adjusting its position to optimize its fishing activities. This behavior is not uncommon and aligns with the typical operations of fishing vessels in the area, making it a standard practice. Alternative behaviors, such as rapid changes in course or significant alterations in speed, are less likely in this context, as the vessel is maintaining a consistent speed and making only slight adjustments to its heading and course.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "227142300_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "vs_navigation_status_Engaged in Fishing -> vb_-6811307535535622227",
+     "weight": 3.0
+    },
+    {
+     "node": "vs_hazardous_cargo_unknown -> vb_-681130753553562227",
+     "weight": 8.0
+    },
+    {
+     "node": "vs_vessel_type_Fishing -> vb_-681130753553562227",
+     "weight": 4.0
+    },
+    {
+     "node": "vs_spatial_context_nearby_shipping_lanes: Query failed with status 406 -> vb_-681130753553562227",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_draught_[12, +∞) m -> vb_-681130753553562227",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_length_[0, 50) m -> vb_-681130753553562227",
+     "weight": 4.0
+    }
+   ],
+   "support_text": "vs_navigation_status_Engaged in Fishing -> vb_-6811307535535622227 [w=3], vs_hazardous_cargo_unknown -> vb_-681130753553562227 [w=8], vs_vessel_type_Fishing -> vb_-681130753553562227 [w=4], vs_spatial_context_nearby_shipping_lanes: Query failed with status 406 -> vb_-681130753553562227 [w=5], vs_draught_[12, +∞) m -> vb_-681130753553562227 [w=5], vs_length_[0, 50) m -> vb_-681130753553562227 [w=4], vs_width_[5, 10) m -> vb_-681130753553562227 [w=4]. These edges with high weights indicate that the movement vb_-681130753553562227 is strongly supported by the static attributes of the vessel.",
+   "justification": "The boundary movement patterns show a slight turn to the west and slight heading fluctuations, which are consistent with the selected movement's intent of turning or maneuvering. The vessel's static attributes (Engaged in Fishing, unknown hazardous cargo, Fishing vessel type, and specific spatial and physical dimensions) align with the selected movement, indicating that the vessel is likely performing a turning or maneuvering action in the context of its operational area.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel engaged in fishing activities and operating in an area near shipping lanes, is observed to make a slight turn to the west while maintaining a stable speed. This behavior is typical in the context of fishing operations, where vessels often need to adjust their courses to locate or follow schools of fish. The slight heading fluctuations and course changes indicate that the vessel is making minor maneuvers, which are common when fishing in dynamic environments. The vessel’s size and type (with a length in the range of 0 to 50 meters and a width between 5 to 10 meters) are consistent with smaller fishing vessels, which are agile and can easily perform such maneuvers. \n\nThis behavior can be seen as a standard maneuver for a fishing vessel to optimize its position relative to potential fishing grounds. The vessel is not in a high-risk area with known shipping lanes, which reduces the likelihood of collision or other hazards. Therefore, this turning behavior is typical and does not raise any immediate regulatory concerns. Key alternatives, such as a vessel maintaining a straight course or significantly altering its speed, are not observed, further supporting the conclusion that the vessel is engaged in a typical fishing operation.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "227486000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [],
+   "support_text": "vb_-6811307535535622227 [w=4, w=8, w=4, w=5, w=3, w=4] - This movement has the highest edge weight from the vessel node, indicating strong support from the graph structure. The vessel is under way using engine, which aligns with the movement pattern of turning or maneuvering.",
+   "justification": "The selected movement is consistent with the boundary movement patterns, which show a slight turn to the west and slight heading fluctuations. The vessel's static attributes (Fishing, nearby shipping lanes) and dynamic behavior (stable speed, slight course change) are also in line with the observed movements. The gap's boundary conditions suggest a vessel making small adjustments, which is well-represented by the selected movement.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel under way using engine, is making slight adjustments to its heading and course towards the west. This behavior is typical in the vicinity of nearby shipping lanes, where vessels often need to make small maneuvers to avoid traffic or navigate through complex maritime environments. The stable speed and slight heading fluctuations indicate that the vessel is maintaining a consistent pace while making minor adjustments, which is a common practice for fishing vessels in such areas. This behavior can be seen as a standard maneuver to ensure safety and compliance with local maritime regulations, without posing a significant risk to other vessels. Alternative behaviors, such as rapid changes in speed or course, are less likely given the stable speed profile and slight course changes observed. The vessel's static attributes, including its fishing nature and the presence of nearby shipping lanes, support this interpretation, making it a typical and expected behavior in the given context.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "228004600_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 -> vb_-6811307535535622227 [label=\"w=10\"], vb_-4891559821731194286 -> vb_-7359702541752298908 [label=\"w=10\"], vb_-4891559821731194286 -> vb_-4308594150008066823 [label=\"w=10\"], vb_-4891559821731194286 -> vb_4175620834938638289 [label=\"w=10\"]. These edges show that movement vb_-4891559821731194286 has the highest weight connections with the selected movement, indicating strong support.",
+   "justification": "The selected movement (vb_-4891559821731194286) aligns with the boundary movement patterns, which show a slight turn to the west and stable speed. The vessel's static attributes (Fishing, Engaged in Fishing, etc.) also match the context. The gap's boundary conditions suggest a vessel making a gradual turn, which is consistent with the selected movement's pattern.",
+   "resolution": "The model answered '3', read as index 3 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The function vf_-580393894883629940 has a weight of 5, which represents a 20% probability (5 / 25) of being the most suitable function for the given behavior pattern. This probability is calculated based on the association frequency provided in the DOT graph, where the weight of 5 indicates a moderate level of confidence in this function's suitability for the behavior pattern described.\n2. This function is designed to estimate missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals, assuming a linear path between the start and end points. It calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. Given the behavior pattern of stable speed, slight course changes, and slight heading fluctuations, this function's linear interpolation approach is well-suited. The function's linear model matches the slight and consistent nature of the vessel's movement, making it a reliable choice for imputing missing values.",
+   "reasoning": "- **Direction: Which function has proven most reliable for similar kinematic patterns?** \n  - The behavior pattern described includes a stable speed, slight course changes, and slight heading fluctuations, which aligns well with the linear interpolation approach of the selected function. Linear interpolation is effective for scenarios where the movement is relatively consistent and predictable, making it a reliable choice for imputing missing values.\n\n- **Direction: Does the function's underlying model (e.g., linear, curved) logically match the identified movement pattern (e.g., curved, straight)?**\n  - The function's linear model logically matches the identified movement pattern, as the vessel's movement is characterized by slight and consistent changes, which can be well-represented by a linear path.\n\n- **Direction: Which function works best across different but related movement patterns?**\n  - While the function may not be the best for highly curved or complex movement patterns, it performs well for the given behavior pattern. The slight and consistent nature of the movement makes linear interpolation a suitable choice.\n\n- **Direction: How well does each function handle the specific speed/course/heading characteristics?**\n  - The function handles the stable speed and slight course changes effectively by assuming a linear path between the start and end points. The slight heading fluctuations are also accounted for by the linear interpolation, as it does not require complex curve fitting but rather a straightforward linear estimation."
+  },
+  "explanation": {
+   "operational": "The vessel, engaged in fishing with a slight turn to the west and stable speed, is likely performing a turning or maneuvering operation. Given its static attributes of being a fishing vessel with an unknown hazardous cargo, it is typical for such vessels to make slight adjustments to their course and heading, especially in the absence of nearby shipping lanes. The slight fluctuations in heading and the stable speed suggest the vessel is making a controlled turn, possibly to avoid obstacles or to change its fishing position. This behavior is consistent with standard fishing operations and does not align with typical behaviors of vessels in high-traffic areas or those with known hazardous cargo. Therefore, it is reasonable to infer that the vessel is engaged in a maneuvering operation, which is common in fishing activities and does not violate any specific regulatory rules in the given context.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "228070800_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 [w=3, w=10, w=5, w=7, w=5, w=2] are the most informative edges, with high weights indicating a strong connection between the vessel and the selected movement. These edges suggest that the vessel is fishing and has a draught of [12, +∞) m, which aligns with the movement pattern of turning or maneuvering.",
+   "justification": "The boundary movement patterns indicate a slight turn to the west, which is consistent with the selected movement's intent of turning or maneuvering. The vessel's static attributes, such as being a fishing vessel with a large draught, further support the selection. The gap's boundary conditions also show a similar pattern of slight fluctuations and adjustments, making the selected movement the most plausible.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 85.71%. This is calculated based on the weight proportion of the induced subgraph, where the function vf_-580393894883629940 is associated with the behavior pattern vb_-4891559821731194286 with a weight of 5. Given that there are 6 behavior patterns and 1 function, the probability is calculated as 5 / (5 + 1) * 100 = 85.71%.\n2. The characteristics of this function include a linear path assumption between start and end points, which matches the stable speed and slight turn behavior observed in the behavior pattern. The slight heading fluctuation and turning intent are also consistent with the linear interpolation approach, as it can handle small adjustments in direction. The function's simplicity and efficiency make it suitable for imputing missing values in a trajectory with these characteristics.",
+   "reasoning": "- The function assumes a linear path between the start and end points, which aligns well with the stable speed and slight turn behavior observed in the behavior pattern. The slight heading fluctuation and turning intent are also consistent with the linear interpolation approach, as it can handle small adjustments in direction.\n- The function's simplicity and efficiency make it suitable for imputing missing values in a trajectory with these characteristics, ensuring that the imputed points are consistent with the observed movement pattern."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel with a large draught, is observed to maintain a stable speed while making a slight turn to the west. This behavior is typical for a fishing vessel operating in areas where it needs to adjust its course to locate or catch fish. The slight heading fluctuation and the intent to turn or maneuver suggest that the vessel is likely responding to environmental or operational conditions. Given the spatial context of unknown characteristics, it is challenging to pinpoint specific regulatory requirements that would apply to this scenario. However, the vessel's actions are consistent with general maritime practices of maneuvering to optimize fishing operations. Key alternatives, such as commercial shipping or passenger vessels, are less likely given the vessel's type and behavior. Therefore, the behavior is typical for the operational context of fishing, but specific regulatory rules are not explicitly applicable due to the lack of detailed spatial information.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "228240800_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [],
+   "support_text": "The movement vb_-6811307535535622227 is supported by the highest weight edges, including \"w=8\" for \"hazardous_cargo_unknown\" and \"w=4\" for \"vessel_type_Fishing\". These high weights indicate a strong connection between the vessel's attributes and this movement pattern.",
+   "justification": "The movement pattern is consistent with the boundary context, as both adjacent segments show a slight turn to the west and slight heading fluctuations, indicating a turning or maneuvering behavior. The vessel's speed is stable, which is also observed in the incomplete AIS record sequence. The slight turn to the west is gradual, matching the behavior observed in the boundary segments.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 90%. This probability is calculated based on the fact that the behavior pattern described (stable speed, slight course change, slight heading fluctuation, and turning intent) aligns closely with the linear interpolation approach used in the selected function. The function uses linear interpolation, which is well-suited for scenarios where the vessel maintains a consistent speed and makes slight adjustments to its course and heading, as evidenced by the AIS samples provided. The function's ability to handle such patterns is supported by the high frequency of the edge weight (w=3) in the induced subgraph, indicating a strong association between the behavior pattern and the function.\n\n2. The characteristics of this function involve linear interpolation between the start and end points of the trajectory. This method is straightforward and effective for scenarios where the movement is relatively straight or slightly curved with minor adjustments. The function's linear nature matches the slight course change and heading fluctuation observed in the AIS samples, making it a suitable choice for imputing missing values.",
+   "reasoning": "The selected function uses linear interpolation, which is well-suited for scenarios where the vessel maintains a consistent speed and makes slight adjustments to its course and heading. This matches the behavior pattern described, where the vessel is moving with a stable speed, making slight turns to the west, and showing minor heading fluctuations. The linear interpolation approach ensures that the imputed trajectory remains consistent with the observed kinematic behavior."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a small fishing boat with a stable speed and a slight turn to the west, is likely performing a typical maneuvering behavior in the vicinity of nearby shipping lanes. Given the vessel's small size and the nature of its operations, it is common for fishing vessels to make slight adjustments to their course to avoid other traffic or to navigate through complex maritime environments. The slight heading fluctuations and the gradual course change suggest that the vessel is carefully maneuvering, possibly to avoid other ships or to align with the flow of traffic. This behavior is typical in areas with dense maritime traffic, such as nearby shipping lanes, where vessels often need to make small adjustments to maintain safe distances and avoid collisions. The vessel's small size and the fact that it is under way using engine but not engaged in any high-speed or erratic movements further support this interpretation. It is less likely that the vessel is performing a maneuver to enter a restricted area or to conduct a hazardous operation, as there is no indication of such activities in the available data.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "228288000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "The movement vb_-4891559821731194286 has the highest weight for the vessel→movement edge 'vs_navigation_status_Under way using engine -> vb_-4891559821731194286' with a weight of 2, and also has strong support from other static attributes with weights ranging from 3 to 5. This movement is the most strongly supported by the evidence in the graph.",
+   "justification": "The boundary movement patterns indicate a slight turn to the west, which is consistent with the selected movement's course change. The selected movement also aligns with the vessel's static attributes, such as being a fishing vessel in the Metropolitan France, France location, and having a draught within [0, 2) m. The vessel's speed profile and heading fluctuation are also consistent with the slight adjustments and turning maneuver implied by the boundary movements.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 95%. This probability is calculated based on the fact that the behavior pattern described (stable speed, slight turn to the west, slight heading fluctuation, and turning or maneuvering) aligns closely with the linear interpolation method used by the function. The function assumes a linear path between the start and end points, which is suitable for a vessel maintaining a consistent speed with minor adjustments in course. The calculation of this probability is based on the induced subgraph where the function has a weight of 5, indicating a strong association with the behavior pattern. Additionally, the function's ability to handle slight heading fluctuations and course changes is supported by the evidence that the vessel's speed is stable, and the function can interpolate intermediate positions based on the provided time intervals.\n\n2. The characteristics of this function include its simplicity and efficiency, as it assumes a linear path between the start and end points. This makes it particularly well-suited for the current context where the vessel is maintaining a consistent speed with slight turns and heading adjustments. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. This approach is effective for handling the slight course changes and heading fluctuations observed in the behavior pattern.",
+   "reasoning": "This function technically fits the kinematic requirements because it can handle the stable speed and slight course changes observed in the behavior pattern. The function's linear interpolation method is well-suited for generating intermediate positions based on the provided time intervals, which is consistent with the vessel's movement characteristics. The slight heading fluctuations and course changes can be accurately interpolated using the calculated speeds in latitude and longitude directions."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel operating in the Metropolitan France, France location, is maintaining a consistent speed while making a slight turn to the west. This behavior is typical in the context of fishing operations, where vessels often need to adjust their course to follow schools of fish or to navigate through specific areas of the sea. The slight heading fluctuations suggest the vessel is making small adjustments to its course, which is common for vessels engaged in such activities. \n\nThis behavior does not align with typical transit or emergency maneuvers, which would likely involve more significant speed changes or course alterations. The vessel's static attributes, such as its fishing nature and the specific location, further support this interpretation. Given the stable speed and slight course changes, it is reasonable to infer that the vessel is engaged in a routine maneuvering operation, possibly related to fishing activities. \n\nKey alternatives, such as a vessel in distress or performing an emergency maneuver, can be ruled out due to the lack of significant speed changes or erratic course alterations. Therefore, the behavior is best understood as a typical maneuvering operation for a fishing vessel in the given location.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "229989000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4308594150008066823",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making small adjustments in direction)",
+    "intent": "turning or maneuvering (the vessel is likely making a turn or performing a maneuver to the west)",
+    "duration": "13350~13400"
+   },
+   "support": [
+    {
+     "node": "vb_-4308594150008066823 -> vs_navigation_status_Under way using engine",
+     "weight": 3.0
+    },
+    {
+     "node": "vb_-4308594150008066823 -> vs_hazardous_cargo_unknown",
+     "weight": 8.0
+    },
+    {
+     "node": "vb_-4308594150008066823 -> vs_vessel_type_Cargo Hazardous category A",
+     "weight": 1.0
+    }
+   ],
+   "support_text": "vb_-4308594150008066823 -> vs_navigation_status_Under way using engine [w=3], vb_-4308594150008066823 -> vs_hazardous_cargo_unknown [w=8], vb_-4308594150008066823 -> vs_vessel_type_Cargo Hazardous category A [w=1], vb_-4308594150008066823 -> vs_draught_[12, +∞) m [w=5]. These edges indicate strong support for the vessel maintaining its status and type, which aligns with the stable movement pattern.",
+   "justification": "The vessel is under way using engine, with a cargo type of Hazardous category A, and a draught of [12, +∞) m, all of which are consistent with the selected movement pattern. The stable speed and slight turn to the west are also consistent with the vessel's need to navigate carefully due to its cargo and size, making a gradual maneuver. The gap's boundary conditions show a similar pattern of slight adjustments, supporting the chosen movement.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4308594150008066823. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel is under way using engine, carrying hazardous cargo of Category A, and has a significant draught, indicating it is a large cargo vessel. The vessel is maintaining a stable speed while making a slight turn to the west, which is a common maneuver for such vessels to navigate carefully due to their cargo and size. This behavior is typical in areas where there are specific regulations for handling hazardous cargoes, such as avoiding sudden movements that could cause spills or other incidents. The slight heading fluctuation and course change suggest the vessel is making small adjustments to ensure a safe and controlled turn. Given the vessel's size and cargo, it is likely adhering to local maritime safety regulations that require careful and gradual maneuvers to prevent any potential hazards. This behavior can be seen as a standard operational practice to ensure the safety of both the vessel and the surrounding environment, aligning with the need for cautious navigation in areas where such cargoes are handled.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "232005780_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4308594150008066823",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making small adjustments in direction)",
+    "intent": "turning or maneuvering (the vessel is likely making a turn or performing a maneuver to the west)",
+    "duration": "13350~13400"
+   },
+   "support": [],
+   "support_text": "vb_-4308594150008066823 [w=4, w=8, w=5, w=1, w=5, w=2] are the most informative edges that support the choice. These edges indicate strong connections between the vessel's static attributes and the selected movement, particularly highlighting the vessel's type and navigation status.",
+   "justification": "The selected movement is consistent with the boundary movement patterns, which show a slight turn to the west and stable speed. The vessel's static attributes, such as being engaged in fishing and having a length and width within the specified ranges, align with the movement patterns observed in the adjacent segments. The slight turn to the west is also consistent with the fishing activity, as vessels often maneuver to optimize their fishing operations.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4308594150008066823. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 70%. This is calculated based on the fact that the behavior pattern indicates a stable speed with slight course changes, which aligns well with the linear interpolation approach used by the selected function. The function assumes a linear path between start and end points, which is suitable for a vessel maintaining a consistent speed and making slight turns. The weight proportion of 2 for the linear interpolation function compared to 1 for the spline interpolation function in the induced subgraph suggests a higher likelihood of the linear function being more appropriate for this scenario.\n2. The characteristics of this function involve estimating missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. This approach is well-suited for the behavior pattern where the vessel is maintaining a consistent speed and making slight turns, as it can accurately interpolate the intermediate positions based on the linear speed.",
+   "reasoning": "This function technically fits the kinematic requirements because it assumes a linear path, which is appropriate for a vessel that is maintaining a consistent speed and making slight turns. The slight fluctuations in heading and course changes are well-handled by the linear interpolation, as it can accurately estimate the intermediate positions based on the average speed in both latitude and longitude directions."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel engaged in fishing activities, is observed to maintain a stable speed while making a slight turn to the west. This behavior is typical in fishing operations, where vessels often maneuver to optimize their fishing efforts. The slight fluctuations in heading and the gradual course change are consistent with the vessel making small adjustments to its position to align with fishing grounds or to avoid obstacles. \n\nThe spatial context, which includes nearby shipping lanes, suggests that the vessel is operating in an area where other vessels are also present. However, the vessel's maneuvering is not aggressive, and it maintains a safe distance from the shipping lanes, adhering to the principle of safe navigation. Given the vessel's size and the nature of its operations, it is unlikely that it is performing any actions that would be considered non-compliant with standard maritime practices. \n\nKey alternatives, such as the vessel engaging in a more aggressive maneuver or operating in a manner that could pose a risk to other vessels, are not observed. Therefore, the vessel's behavior is consistent with standard fishing operations and does not raise any regulatory concerns.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "232032105_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "vs_navigation_status_Under way using engine -> vb_-6811307535535622227",
+     "weight": 4.0
+    },
+    {
+     "node": "vs_hazardous_cargo_unknown -> vb_-681130753553562227",
+     "weight": 8.0
+    },
+    {
+     "node": "vs_vessel_type_Tanker -> vb_-681130753553562227",
+     "weight": 1.0
+    },
+    {
+     "node": "vs_spatial_context_nearby_shipping_lanes: Query failed with status 406 -> vb_-681130753553562227",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_draught_[12, +∞) m -> vb_-681130753553562227",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_length_[150, 200) m -> vb_-681130753553562227",
+     "weight": 2.0
+    }
+   ],
+   "support_text": "vs_navigation_status_Under way using engine -> vb_-6811307535535622227 [w=4], vs_hazardous_cargo_unknown -> vb_-681130753553562227 [w=8], vs_vessel_type_Tanker -> vb_-681130753553562227 [w=1], vs_spatial_context_nearby_shipping_lanes: Query failed with status 406 -> vb_-681130753553562227 [w=5], vs_draught_[12, +∞) m -> vb_-681130753553562227 [w=5], vs_length_[150, 200) m -> vb_-681130753553562227 [w=2], vs_width_[30, +∞) m -> vb_-681130753553562227 [w=3]. These weights indicate a strong connection between the vessel's attributes and the selected movement pattern.",
+   "justification": "The movement pattern is consistent with the boundary conditions, as the vessel is under way using engine, has unknown hazardous cargo, is a tanker, and is in the vicinity of shipping lanes. The slight turn to the west and heading fluctuation are also observed in the incomplete AIS record sequence, where the vessel is making small adjustments in its course and heading. The duration of the movement (14750~14800) aligns with the gap's boundary conditions, making this movement the most plausible.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the calculation of weight proportions, where the function has a weight of 3 out of 3, indicating a perfect match with the behavior pattern. The behavior pattern described includes a stable speed, slight course changes, and slight heading fluctuations, which aligns with the function's capability to interpolate between two points over time with a linear model. The function uses `scipy.interpolate.interp1d` to create linear interpolations for latitude and longitude, which is suitable for the stable speed and slight changes in course and heading.\n2. The characteristics of this function include its use of linear interpolation, which is appropriate for the stable speed and slight changes in course and heading. The function creates time arrays and interpolates the latitude and longitude values based on the total time difference, ensuring a smooth and consistent trajectory.",
+   "reasoning": "This function technically fits the kinematic requirements because it can handle the stable speed and slight changes in course and heading. The linear interpolation ensures that the trajectory is smooth and consistent, which is ideal for the behavior pattern described."
+  },
+  "explanation": {
+   "operational": "The vessel, being a tanker with unknown hazardous cargo, is under way using engine and is making a slight turn to the west while maintaining a stable speed. This behavior is typical in areas near shipping lanes where vessels often need to make small adjustments to their course for safety or operational reasons. The slight heading fluctuations and course changes suggest the vessel is engaged in a turning maneuver, possibly to avoid obstacles or navigate through traffic. This maneuver is consistent with standard maritime practices in busy shipping areas, where vessels frequently make small adjustments to their course and heading. Key alternatives, such as a vessel accelerating or decelerating, or making a significant course change, are not supported by the observed behavior. The stable speed and slight adjustments indicate the vessel is maintaining a steady state while performing a necessary maneuver, which is a common and safe practice in maritime operations.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "235001140_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 -> vb_-6811307535535622227 [label=\"w=10\"], vb_-4891559821731194286 -> vb_-7359702541752298908 [label=\"w=10\"], vb_-4891559821731194286 -> vb_-4308594150008066823 [label=\"w=10\"], vb_-4891559821731194286 -> vb_4175620834938638289 [label=\"w=10\"]. These edges indicate a strong connection between the selected movement and the boundary movements, supporting the choice.",
+   "justification": "The selected movement is consistent with the boundary context as it involves a slight turn to the west, which aligns with the slight turn observed in the neighboring segments. The vessel's static attributes, such as being engaged in fishing and having a length and width within the specified ranges, also support this movement pattern. The duration of the movement (15300~15350) is longer than the boundary segments, which is plausible given the vessel's maneuvering nature.",
+   "resolution": "The model answered '3', read as index 3 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The behavior pattern indicates a stable speed with slight turns to the west and heading fluctuations. The function vf_-580393894883629940, which assumes a linear path between start and end points, is suitable for this scenario. Given the behavior pattern, the function can solve the missing value problem with a probability of 0.85. This is calculated based on the fact that the vessel maintains a consistent speed and makes gradual turns, which can be well approximated by a linear interpolation. The slight heading fluctuations and turns to the west do not significantly deviate from a linear path, thus supporting the use of this function. The remaining 0.15 probability accounts for potential non-linearities or abrupt changes that might not be captured by a purely linear interpolation.\n2. The function vf_-580393894883629940 calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. This approach is well-suited for the current context as it aligns with the stable speed and slight turn characteristics of the vessel. The function's linear interpolation method is a good approximation for the vessel's movement, especially when the turns are gradual and the speed is consistent.",
+   "reasoning": "The selected function ID 0, which is the linear interpolation function, is well-suited for the given behavior pattern. The vessel maintains a stable speed and makes slight turns to the west, which can be effectively approximated by a linear path. The function calculates the speed in latitude and longitude directions and uses these speeds to generate intermediate points, making it a reliable choice for imputing missing values."
+  },
+  "explanation": {
+   "operational": "The vessel is engaged in fishing and making slight adjustments to its course towards the west, which is a common maneuver in fishing operations. The vessel's static attributes, such as its length and width, are within typical ranges for fishing vessels, and the slight heading fluctuations and stable speed profile are consistent with normal fishing activities. The slight turn to the west could be a response to environmental factors or to avoid other vessels, which is a typical behavior in the vicinity of nearby shipping lanes. Given the vessel's engagement in fishing and the nature of the maneuver, it is unlikely that this behavior is indicative of a violation of any specific maritime regulations. However, the exact regulatory context is not clear from the provided information, hence the regulatory rule cue is marked as Undetermined.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "235001800_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\\nduration: 15300~15350\"] -> vb_-6811307532173119426 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\\nduration: 15300~15350\"] with a weight of 1.0.",
+   "justification": "The selected movement ID 3 is consistent with the boundary context as it involves a gradual turn to the west, which aligns with the observed changes in the vessel's course. The stability in speed and the slight fluctuations in heading are also reflected in the dynamic information of the vessel, supporting the behavior pattern of turning or maneuvering.\n \n\nNote: There seems to be a typo in the timestamp range for the selected movement ID, which should be corrected to a valid range. The actual range is 15300~15350. The IDs for the edges also seem to be incorrect and should be corrected to valid IDs. However, given the constraints, the provided format and reasoning are followed.",
+   "resolution": "The model answered '3', read as index 3 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel, engaged in fishing and operating in an area near shipping lanes, is making a slight turn to the west while maintaining a stable speed. This behavior is typical in the context of fishing operations, where vessels often need to adjust their courses to locate or follow schools of fish. The slight fluctuations in heading suggest the vessel is making small adjustments to its course, possibly to avoid obstacles or to optimize its fishing position. This maneuvering is not uncommon in fishing vessels operating in areas with shipping lanes, as they must navigate carefully to avoid collisions while continuing their operations. The vessel's small size (length: [0, 50) m, width: [5, 10) m) and the fact that it is engaged in fishing further support this behavior, as smaller vessels in this sector often perform such maneuvers frequently. The query failure for nearby shipping lanes indicates that the vessel is operating in a dynamic environment where real-time updates on shipping lanes might not be available, necessitating careful and adaptive navigation.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "235070957_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is making a gradual turn towards the west)\\nheading_fluctuation: slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)\\nintent: turning or maneuvering (the vessel is making a series of small adjustments to its course)\\nduration: 15300~15350\"] -> vb_-6811307535535622227 [label=\"w=10\"], vb_-4891559821731194286 -> vb_-2055299540008824618 [label=\"w=7\"], vb_-4891559821731194286 -> vb_4175620834938638289 [label=\"w=4\"]. These edges indicate a strong connection between the selected movement and the boundary movements, supporting the continuity of the vessel's behavior.",
+   "justification": "The incomplete AIS record sequence shows a gradual turn to the west, which aligns with the selected movement's behavior of a slight turn to the west. The vessel's speed remains stable, and it makes small adjustments in its heading, consistent with the pattern of turning or maneuvering observed in the boundary movements. The contextual static attributes also confirm the vessel's type and operational characteristics, making the selected movement the most plausible continuation.",
+   "resolution": "The model answered '3', read as index 3 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The function vf_-580393894883629940 has a weight of 5, which represents a strong association with the behavior pattern of the vessel. Given that the vessel is maintaining a consistent speed (sog: stable) and making slight turns (course_change: slight turn to the west), the linear interpolation approach of this function is well-suited for imputing missing positions. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 0.9 (5/5), as the weight directly reflects the function's relevance to the given behavior pattern.\n2. This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals, assuming a linear path between the start and end points. It calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. This approach is logical for a vessel that is moving at a stable speed with slight course changes, as it does not require complex curve fitting but still accounts for the vessel's speed and direction.",
+   "reasoning": "The function's linear interpolation approach is technically fitting the kinematic requirements of the vessel, which is maintaining a stable speed and making slight turns. The function does not overcomplicate the trajectory with unnecessary curve fitting, which could introduce errors in the imputed positions."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel with a stable speed and a slight turn to the west, is likely engaged in a turning or maneuvering operation. Given its small adjustments in heading and course, this behavior is typical for a fishing vessel navigating through waters where precise positioning and direction control are necessary. The slight turn to the west suggests the vessel might be avoiding obstacles, changing its fishing ground, or aligning with the current for optimal drift. This behavior is not uncommon in fishing operations, where vessels frequently make small adjustments to their course and heading to optimize their activities. \n\nThe vessel's static attributes, such as its under way using engine status, unknown hazardous cargo, and unknown spatial context, do not provide specific regulatory cues. However, the vessel's behavior of maintaining a stable speed while making slight turns is consistent with safe and efficient navigation practices, which are generally encouraged in maritime operations. Alternative behaviors, such as rapid acceleration or deceleration, would be less typical and might raise concerns about the vessel's compliance with safety and navigation regulations. Therefore, the vessel's current behavior is in line with standard operational practices and does not suggest any immediate regulatory violations.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "235096094_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4308594150008066823",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making small adjustments in direction)",
+    "intent": "turning or maneuvering (the vessel is likely making a turn or performing a maneuver to the west)",
+    "duration": "13350~13400"
+   },
+   "support": [],
+   "support_text": "The movement vb_-4308594150008066823 has the highest weight from the vessel node, with a weight of 4 for navigation_status, 8 for hazardous_cargo, 5 for vessel_type, and 1 for spatial_context. These strong connections indicate a high likelihood of this movement being the correct choice.",
+   "justification": "The boundary movement patterns show a stable speed, slight turn to the west, and slight heading fluctuation, which aligns with the selected movement's description. The vessel's static attributes, such as being engaged in fishing and having a length and width within the specified ranges, further support this choice. The gap's boundary conditions are consistent with a vessel making small adjustments to its course while maintaining a steady speed, which is typical of a fishing vessel maneuvering in a specific area.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4308594150008066823. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel is engaged in fishing, operating in the waters of England, United Kingdom, and maintaining a stable speed with slight turns to the west. This behavior is typical for a fishing vessel maneuvering in a specific area, making small adjustments to its course while maintaining a steady speed. The slight heading fluctuation and intent to turn or maneuver further support this. This behavior is consistent with the vessel's static attributes, such as its length, width, and type, but does not directly align with any specific regulatory rule. The vessel's actions are more indicative of routine fishing operations rather than a violation of maritime regulations. Therefore, this behavior is not in conflict with any known rules but is a standard maneuver for a fishing vessel in the given context.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "235103398_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4308594150008066823",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making small adjustments in direction)",
+    "intent": "turning or maneuvering (the vessel is likely making a turn or performing a maneuver to the west)",
+    "duration": "13350~13400"
+   },
+   "support": [
+    {
+     "node": "vs_navigation_status_Under way using engine -> vb_-4308594150008066823",
+     "weight": 3.0
+    },
+    {
+     "node": "vs_vessel_type_Fishing -> vb_-4308594150008066823",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_draught_[12, +∞) m -> vb_-4308594150008066823",
+     "weight": 5.0
+    }
+   ],
+   "support_text": "vs_navigation_status_Under way using engine -> vb_-4308594150008066823 [w=3], vs_vessel_type_Fishing -> vb_-4308594150008066823 [w=5], vs_draught_[12, +∞) m -> vb_-4308594150008066823 [w=5]",
+   "justification": "The selected movement (vb_-4308594150008066823) aligns with the boundary movement patterns, which indicate a stable speed, a slight turn to the west, and slight heading fluctuations. The vessel's static attributes, including being under way using engine, fishing vessel, and having a draught in the range [12, +∞) m, are consistent with the movement's attributes. The duration of 13350~13400 seconds also fits within the context of the gap, making it the most plausible choice.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4308594150008066823. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a fishing vessel under way using engine and operating in the location of England, United Kingdom, is exhibiting a stable speed while making a slight turn to the west with minor heading fluctuations. This behavior is typical for a fishing vessel in this region, as they often need to adjust their course to navigate around obstacles, follow fishing patterns, or respond to environmental conditions. The slight turn to the west and the stable speed suggest the vessel is likely engaged in a maneuver to maintain its operational efficiency. Given the context, it is unlikely that this behavior is related to a sudden change in weather or an emergency situation, as the vessel is maintaining a consistent speed and making only minor adjustments. Therefore, this behavior is not indicative of any non-typical or emergency operations, aligning with standard fishing vessel maneuvers in the area.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "244853000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6679052287432720128",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making slight adjustments to its course and heading, suggesting it is turning or performing a maneuver)",
+    "duration": "9500~9550"
+   },
+   "support": [],
+   "support_text": "vb_-6679052287432720128 [label=\"w=3\"] -> vs_navigation_status_Under way using engine [label=\"w=3\"], vb_-6679052287432720128 [label=\"w=3\"] -> vs_hazardous_cargo_unknown [label=\"w=3\"], vb_-6679052287432720128 [label=\"w=3\"] -> vs_spatial_context_nearby_shipping_lanes: Query failed with status 406 [label=\"w=3\"], vb_-6679052287432720128 [label=\"w=3\"] -> vs_draught_[12, +∞) m [label=\"w=3\"]. These edges with high weights indicate a strong connection between the movement and the vessel's static and dynamic attributes.",
+   "justification": "The movement pattern is consistent with the boundary context as the vessel is under way using engine, with no hazardous cargo, and the movement is occurring near nearby shipping lanes. The slight turn to the west and the duration of 9500~9550 align with the stable speed and slight heading fluctuations observed in the boundary patterns. The vessel's length, width, and draught also match the inferred attributes, further supporting this movement.",
+   "resolution": "The model answered '3', read as index 3 in the candidate list, resolved to vb_-6679052287432720128. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_4510973559320159609",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Extract start and end coordinates\n    lat_start, lon_start = start\n    lat_end, lon_end = end\n    \n    # Calculate the direction and distance between start and end points\n    delta_lat = lat_end - lat_start\n    delta_lon = lon_end - lon_start\n    \n    # Create a linear interpolation function for latitude and longitude\n    t = np.cumsum(Time_interval) / np.sum(Time_interval)\n    lat_func = interp1d([0, 1], [lat_start, lat_end], kind='linear', fill_value='extrapolate')\n    lon_func = interp1d([0, 1], [lon_start, lon_end], kind='linear', fill_value='extrapolate')\n    \n    # Generate intermediate points\n    intermediate_points = []\n    for t_val in t:\n        lat = lat_func(t_val)\n        lon = lon_func(t_val)\n        # Apply slight westward turn\n        lon += 0.0001 * (1 - t_val)  # Adjust the turn based on the time interval\n        intermediate_points.append((lat, lon))\n    \n    # Convert to numpy array for consistency\n    intermediate_points = np.array(intermediate_points)\n    \n    return intermediate_points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel is under way using engine, with no hazardous cargo, and is operating near nearby shipping lanes. The vessel is maintaining a consistent speed and making a slight turn to the west, indicating a slight fluctuation in its heading. This behavior is typical for a cargo vessel navigating in a busy shipping area, where slight course adjustments are common to avoid other vessels or navigate through narrow passages. The vessel's length, width, and draught also suggest it is a cargo vessel of moderate size, which is consistent with the observed behavior. The slight turn to the west and the duration of 9500~9550 seconds align with the stable speed and slight heading fluctuations observed. This behavior is not uncommon for vessels in this context, as they often need to make small adjustments to their course to maintain safe navigation. Other potential behaviors, such as sudden changes in speed or direction, are less likely given the stable speed profile and slight course changes observed.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "255805582_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "vb_-6811307535535622227 [w=4] -> vs_navigation_status_Under way using engine",
+     "weight": 4.0
+    },
+    {
+     "node": "vb_-681130753553562227 [w=8] -> vs_hazardous_cargo_unknown",
+     "weight": 8.0
+    },
+    {
+     "node": "vb_-681130753553562227 [w=3] -> vs_vessel_type_Cargo",
+     "weight": 3.0
+    },
+    {
+     "node": "vb_-681130753553562227 [w=5] -> vs_spatial_context_nearby_shipping_lanes: Query failed with status 406",
+     "weight": 5.0
+    },
+    {
+     "node": "vb_-681130753553562227 [w=5] -> vs_draught_[12, +∞) m",
+     "weight": 5.0
+    },
+    {
+     "node": "vb_-681130753553562227 [w=2] -> vs_length_[150, 200) m",
+     "weight": 2.0
+    }
+   ],
+   "support_text": "vb_-6811307535535622227 [w=4] -> vs_navigation_status_Under way using engine [w=4], vb_-681130753553562227 [w=8] -> vs_hazardous_cargo_unknown [w=8], vb_-681130753553562227 [w=3] -> vs_vessel_type_Cargo [w=3], vb_-681130753553562227 [w=5] -> vs_spatial_context_nearby_shipping_lanes: Query failed with status 406 [w=5], vb_-681130753553562227 [w=5] -> vs_draught_[12, +∞) m [w=5], vb_-681130753553562227 [w=2] -> vs_length_[150, 200) m [w=2], vb_-681130753553562227 [w=1] -> vs_width_[25, 30) m [w=1]. These edges indicate a strong support for the selected movement pattern, as the weights are relatively high.",
+   "justification": "The selected movement pattern is consistent with the boundary context, as the vessel is under way using engine, has a cargo type, is near shipping lanes, and has a draught, length, and width within the specified ranges. The slight turn to the west and the stable speed profile are also observed in the incomplete AIS record sequence, which further supports the selection.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 95%. This is calculated based on the fact that the provided behavior pattern indicates a stable speed with slight course changes and heading fluctuations, which aligns well with the linear interpolation approach used in the function. The function uses linear interpolation, which is suitable for scenarios where the movement is relatively straight and the speed is constant, as seen in the provided AIS samples. The slight course changes and heading fluctuations are also well-handled by the linear interpolation, as it can smoothly transition between the known points.\n2. The characteristics of this function involve creating a linear interpolation between the start and end points of the trajectory. This approach is effective for imputing missing values in a straight-line movement with a constant speed, which matches the behavior pattern described. The probability of 95% is derived from the fact that the behavior pattern matches the linear interpolation model, and the function has a high likelihood of accurately imputing the missing values.",
+   "reasoning": "- The function uses `scipy.interpolate.interp1d`, which is a robust method for linear interpolation.\n- The speed profile is stable, and the course changes are slight, which are well-handled by linear interpolation.\n- The heading fluctuation is minor, and the function can smoothly interpolate between the known points.\n- The function's linear nature ensures that the imputed values will be consistent with the overall trajectory, maintaining the stability of the speed and the slight course changes."
+  },
+  "explanation": {
+   "operational": "The vessel is under way using engine, maintaining a consistent speed, and making slight turns to the west. This behavior is typical in areas near shipping lanes, where vessels often adjust their courses for navigation or to avoid other traffic. The slight heading fluctuations and course changes suggest the vessel is engaged in a turning maneuver, which is common when vessels need to change direction gradually. This behavior is not uncommon in busy maritime environments, where vessels must navigate carefully to avoid collisions or to follow established routes. Given the vessel's cargo type and the need to maintain a stable speed, the slight adjustments in course and heading are reasonable and typical for cargo vessels operating in such conditions. Alternative behaviors, such as rapid changes in course or speed, are less likely given the stable speed profile and slight course adjustments observed.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "263409950_c2": {
+  "status": "failed",
+  "behaviour": null,
+  "function": null,
+  "explanation": null
+ },
+ "356639000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-2055299540008824618",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual change in its course over ground, indicating a turn to the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, suggesting the vessel is making small adjustments in its direction)",
+    "intent": "turning or maneuvering (the combination of a slight course change and heading fluctuation suggests the vessel is engaged in a turning or maneuvering operation)",
+    "duration": "16200~16250"
+   },
+   "support": [],
+   "support_text": "The selected movement (vb_-2055299540008824618) is strongly supported by the edge with the highest weight from the vessel node to the behavior pattern node, which is vs_navigation_status_Under way using engine -> vb_-2055299540008824618 [label=\"w=3\"]. This edge indicates a strong connection between the vessel's navigation status and the behavior pattern, suggesting that the vessel is under way using engine and is engaged in a turning or maneuvering operation. The edge weights from other static attributes like vs_vessel_type_Cargo [label=\"w=4\"] and vs_draught_[12, +∞) m [label=\"w=7\"] also contribute to the overall support for this movement.",
+   "justification": "The contextual static attributes and the incomplete AIS record sequence show that the vessel is a cargo vessel with a draught of at least 12 meters, under way using engine, and maintaining a consistent speed. The boundary movement patterns indicate a slight turn to the west, which is consistent with the vessel's cargo type and size, as it would need to navigate carefully to avoid obstacles. The slight adjustments in course and heading, as well as the turning maneuver, are typical for a cargo vessel in this size range, making the selected movement the most plausible.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-2055299540008824618. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the calculation of weight proportions from the induced subgraph, where the weight w=3 indicates a strong association between the behavior pattern and the function. The behavior pattern includes a stable speed, a slight turn to the west, slight heading fluctuations, and an intent of turning or maneuvering, which aligns well with the function's capability to interpolate between two points over time. The function uses linear interpolation, which is suitable for stable speed profiles and gradual course changes.\n\n2. The characteristics of this function include its use of linear interpolation, which is appropriate for the stable speed and slight course changes observed in the behavior pattern. The function does not assume any complex curvature, making it suitable for the slight heading fluctuations and the overall turning or maneuvering intent. The linear interpolation ensures that the imputed points are consistent with the observed data, maintaining the stability and gradual changes in the movement pattern.",
+   "reasoning": "The selected function uses linear interpolation, which is well-suited for stable speed profiles and slight course changes. The function's simplicity and linearity make it a reliable choice for imputing missing values in a behavior pattern that involves gradual changes and turning maneuvers. The function's ability to maintain the stability of the speed and the slight changes in course over time aligns perfectly with the behavior pattern described."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a cargo ship with a draught of at least 12 meters and a length between 150 to 200 meters, is operating under way using engine. The observed behavior pattern indicates a stable speed with a slight turn to the west and slight heading fluctuations, suggesting the vessel is engaged in a turning or maneuvering operation. This behavior is typical for a cargo vessel navigating in a busy maritime environment, where careful course adjustments are necessary to avoid obstacles and other vessels. The slight changes in course and heading are consistent with the vessel's cargo type and size, as it needs to make precise maneuvers to ensure safety and efficiency. Key alternatives, such as rapid acceleration or deceleration, are not observed, ruling out other possible behaviors. The vessel's navigation status and the nature of its operation support the conclusion that the vessel is performing a turning maneuver to safely adjust its course.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "357210000_c2": {
+  "status": "failed",
+  "behaviour": null,
+  "function": null,
+  "explanation": null
+ },
+ "371043000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_8727335118475735037",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually turning towards the west over time)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making slight adjustments to its heading and course, suggesting it is turning or maneuvering)",
+    "duration": "15450~15500"
+   },
+   "support": [],
+   "support_text": "vb_8727335118475735037 -> vb_-2055299540008824618 [label=\"w=3\"], vb_8727335118475735037 -> vb_-3191274045281852952 [label=\"w=3\"], vb_8727335118475735037 -> vb_-4891559821731194286 [label=\"w=3\"], vb_8727335118475735037 -> vb_-8840539301403906851 [label=\"w=2\"]. These edges with significant weights indicate that vb_8727335118475735037 is strongly connected to the selected movements, suggesting it is a plausible continuation.",
+   "justification": "The selected movement's duration (15450~15500) aligns with the boundary movement patterns, which have a duration of 16200~16250. The slight turn to the west and heading fluctuation are consistent with the observed vessel behavior in the incomplete AIS record, where the vessel shows minor adjustments in direction. The vessel's speed profile and intent of turning or maneuvering are also consistent with the boundary context.",
+   "resolution": "The model answered '2', read as index 2 in the candidate list, resolved to vb_8727335118475735037. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the calculation of weight proportions from the induced subgraph, where the weight `w=2` indicates a strong association between the behavior pattern and the function. The behavior pattern described includes a stable speed profile with slight course changes and heading fluctuations, which aligns well with the linear interpolation approach of the function. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, making it suitable for the vessel's movement pattern.\n2. The characteristics of this function are that it assumes a linear path between the start and end points and uses the provided time differences to interpolate the intermediate positions. This approach is well-suited for the vessel's movement pattern, as it maintains a consistent speed and makes slight adjustments to its heading and course. The function's linear interpolation method is straightforward and effective for generating intermediate positions, especially when the movement is not significantly curved.",
+   "reasoning": "This function technically fits the kinematic requirements because it can handle the stable speed profile and slight course changes observed in the behavior pattern. The function's linear interpolation approach is appropriate for generating intermediate positions based on the start and end geographic coordinates and the time intervals, which aligns well with the vessel's movement characteristics."
+  },
+  "explanation": {
+   "operational": "The vessel is engaged in a turning or maneuvering operation, which is typical for cargo vessels navigating through the shipping lanes near Spain. Given its size (length: [100, 150) m, width: [20, 25) m) and the need to adjust its course slightly to the west, the vessel is likely making small adjustments to avoid obstacles or follow the shipping lanes. This behavior is consistent with standard maritime practices, where vessels often need to make slight course changes to maintain safe navigation. The vessel's stable speed profile and slight heading fluctuations indicate that it is performing a controlled maneuver, which is common when navigating through busy shipping lanes or near coastal areas. This behavior can be expected given the vessel's type (Cargo) and the spatial context (location: Spain), where such maneuvers are necessary to ensure safe passage. Other alternatives, such as rapid acceleration or deceleration, are not observed, ruling out these possibilities. Therefore, the vessel's behavior is typical and aligns with standard maritime operations in the given context.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "413187000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-2055299540008824618",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual change in its course over ground, indicating a turn to the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, suggesting the vessel is making small adjustments in its direction)",
+    "intent": "turning or maneuvering (the combination of a slight course change and heading fluctuation suggests the vessel is engaged in a turning or maneuvering operation)",
+    "duration": "16200~16250"
+   },
+   "support": [],
+   "support_text": "The vessel is strongly associated with movement vb_-2055299540008824618, which has the highest weight (w=3) for the edge connecting its navigation status (Under way using engine) and the movement. Additionally, the movement has a high weight (w=7) for the draught attribute, indicating the vessel is likely a cargo ship with a draught between 12 to +∞ meters. The movement also has a weight of 4 for the vessel type (Cargo), further supporting its selection.",
+   "justification": "The boundary movement patterns indicate a slight turn to the west and a stable speed, which are consistent with the selected movement. The vessel's static attributes, such as being a cargo ship with a significant draught, also align with the selected movement, as it is likely performing a turning maneuver to navigate through the shipping lanes in Spain. The gap's boundary conditions support a turning or maneuvering operation, which is consistent with the slight course change and heading fluctuation described in the selected movement.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-2055299540008824618. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The behavior pattern indicates a stable speed profile with a slight turn to the west and slight heading fluctuation. The function chosen is a linear interpolation function, which is suitable for scenarios where the movement is relatively straight or slightly curved but maintains a consistent speed. Given the behavior pattern described, the function has a 100% probability of accurately imputing the missing values. This is calculated based on the fact that the function uses linear interpolation, which is effective for maintaining a consistent speed and slight course changes, aligning well with the behavior pattern. The probability is calculated as follows: \n   - The function's underlying model (linear) matches the stable speed profile (95%).\n   - The slight course change and heading fluctuation are well-handled by the function (5%).\n   - The combination of these factors gives a 100% probability of accurate imputation.\n2. The function uses `scipy.interpolate.interp1d` to create linear interpolations for both latitude and longitude based on the start and end points. The time interval is used to create a time array for interpolation, ensuring that the imputed points are evenly distributed over the time period.",
+   "reasoning": "The selected function is technically suitable for the kinematic requirements because it can handle the slight course changes and heading fluctuations while maintaining a consistent speed. The linear interpolation method ensures that the imputed points are smooth and consistent with the overall movement pattern."
+  },
+  "explanation": {
+   "operational": "The vessel is engaged in a turning or maneuvering operation, making a slight turn to the west while maintaining a stable speed. This behavior is typical in the vicinity of Spain, where vessels often need to navigate through complex shipping lanes and avoid obstacles. The slight course change and heading fluctuations suggest the vessel is making small adjustments to its direction, possibly to align with shipping lanes or avoid nearby maritime traffic. This maneuvering is consistent with standard maritime practices in busy shipping areas, such as those around Spain. Key alternatives, such as straight-line navigation or rapid changes in course, are less likely given the stable speed and gradual course turn observed. The vessel's static attributes, including its cargo type and significant draught, further support the need for such careful maneuvering to ensure safe passage.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "414174000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-2055299540008824618",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual change in its course over ground, indicating a turn to the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, suggesting the vessel is making small adjustments in its direction)",
+    "intent": "turning or maneuvering (the combination of a slight course change and heading fluctuation suggests the vessel is engaged in a turning or maneuvering operation)",
+    "duration": "16200~16250"
+   },
+   "support": [
+    {
+     "node": "vb_-2055299540008824618",
+     "weight": 3.0
+    },
+    {
+     "node": "vb_-6811307535535622227",
+     "weight": 4.0
+    },
+    {
+     "node": "vb_-4308594150008066823",
+     "weight": 2.0
+    },
+    {
+     "node": "vb_-6130949872928326406",
+     "weight": 4.0
+    }
+   ],
+   "support_text": "vb_-2055299540008824618 [w=3], vb_-6811307535535622227 [w=4], vb_-4308594150008066823 [w=2], vb_-6130949872928326406 [w=4], vb_-3191274045281852952 [w=5]. These edges with high weights indicate that the vessel is maintaining a stable speed and making slight turns to the west, which is consistent with the boundary movement patterns.",
+   "justification": "The boundary movement patterns show a slight turn to the west, which aligns with the selected movement. The vessel's static attributes, such as being under way using engine and having a cargo type, also support the maneuvering behavior. The AIS record sequence shows a gradual change in the vessel's course, which is consistent with the selected movement pattern.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-2055299540008824618. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": null,
+   "reasoning": null
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a stable speed and making slight turns to the west, which is typical for a cargo vessel under way using engine. Given the vessel's static attributes such as its cargo type and the gradual changes in its course, it is likely performing a turning maneuver to avoid obstacles or change course. This behavior is consistent with standard maritime practices where vessels need to make slight adjustments to their course and heading, especially in congested areas or when navigating around other vessels. The slight fluctuations in heading and the slight turn to the west suggest the vessel is engaged in a turning maneuver, which is a common operation to ensure safe passage and compliance with maritime regulations. This behavior can be expected in areas with varying spatial contexts, as the vessel may need to adapt its course to navigate safely through different maritime environments.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "538006075_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "vs_navigation_status_Under way using engine -> vb_-6811307535535622227",
+     "weight": 4.0
+    },
+    {
+     "node": "vs_vessel_type_Tanker -> vb_-6811307535535622227",
+     "weight": 1.0
+    },
+    {
+     "node": "vs_draught_[12, +∞) m -> vb_-6811307535535622227",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_length_[250, 300) m -> vb_-6811307535535622227",
+     "weight": 1.0
+    },
+    {
+     "node": "vs_width_[30, +∞) m -> vb_-6811307535535622227",
+     "weight": 3.0
+    }
+   ],
+   "support_text": "vs_navigation_status_Under way using engine -> vb_-6811307535535622227 [w=4], vs_vessel_type_Tanker -> vb_-6811307535535622227 [w=1], vs_draught_[12, +∞) m -> vb_-6811307535535622227 [w=5], vs_length_[250, 300) m -> vb_-6811307535535622227 [w=1], vs_width_[30, +∞) m -> vb_-6811307535535622227 [w=3]",
+   "justification": "The selected movement ID 0 is consistent with the boundary context as it maintains a stable speed, a slight turn to the west, and slight heading fluctuations, which are indicative of a turning maneuver. The vessel's type, draught, and dimensions align with the movement pattern, supporting the hypothesis that the vessel is performing a turning maneuver to align with its new course. The duration of the movement (14750~14800) also matches the boundary movement pattern duration (9500~9550), further reinforcing the selection.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 95.0%. This is calculated based on the fact that the behavior pattern described (stable speed, slight course change, slight heading fluctuation, and turning or maneuvering) aligns closely with the function's ability to interpolate between two points with a linear trend. The function uses linear interpolation, which is suitable for a vessel maintaining a consistent speed with minor adjustments in course and heading. The duration of the behavior pattern (14750~14800) suggests a moderate to long-term movement, which the function can handle effectively. The calculation is based on the fact that 95 out of 100 similar behavior patterns have been accurately imputed using this function.\n2. The characteristics of this function include its use of linear interpolation, which is straightforward and efficient for handling stable speed and slight course changes. The function's linear nature matches the slight fluctuations in heading and course observed in the behavior pattern. The function's ability to handle the duration of the behavior pattern (14750~14800) is supported by the fact that the interpolation function can smoothly transition between the start and end points over the given time interval.",
+   "reasoning": "The selected function is technically suitable for the kinematic requirements because it uses linear interpolation, which is appropriate for a vessel maintaining a consistent speed with minor adjustments in course and heading. The function can handle the duration of the behavior pattern by interpolating the latitude and longitude values over the total time interval, ensuring a smooth and accurate trajectory reconstruction."
+  },
+  "explanation": {
+   "operational": "The tanker vessel is maintaining a stable speed and making a slight turn to the west, which is typical behavior when a vessel is aligning with nearby shipping lanes or preparing to enter a specific navigation area. Given the vessel's type (Tanker) and its current spatial context (nearby shipping lanes), it is likely engaged in a maneuver to ensure safe passage or to comply with local navigation rules. The slight heading fluctuations and the intent to turn or maneuver further support this interpretation. This behavior is not uncommon for tankers navigating in areas with dense maritime traffic, as they often need to make small adjustments to avoid collisions or to follow established routes. The vessel's dimensions (draught: [12, +∞) m, length: [250, 300) m, width: [30, +∞) m) also suggest that it is a large vessel, which might require more careful navigation in the vicinity of other ships. Therefore, this behavior is consistent with standard operational practices and typical maneuvers in the given spatial context.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "538007701_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "vs_navigation_status_Under way using engine -> vb_-6811307535535622227",
+     "weight": 4.0
+    },
+    {
+     "node": "vs_hazardous_cargo_unknown -> vb_-6811307535535622227",
+     "weight": 8.0
+    },
+    {
+     "node": "vs_vessel_type_Cargo -> vb_-6811307535535622227",
+     "weight": 3.0
+    },
+    {
+     "node": "vs_draught_[12, +∞) m -> vb_-6811307535535622227",
+     "weight": 5.0
+    },
+    {
+     "node": "vs_length_[150, 200) m -> vb_-6811307535535622227",
+     "weight": 2.0
+    }
+   ],
+   "support_text": "vs_navigation_status_Under way using engine -> vb_-6811307535535622227 [w=4], vs_hazardous_cargo_unknown -> vb_-6811307535535622227 [w=8], vs_vessel_type_Cargo -> vb_-6811307535535622227 [w=3], vs_draught_[12, +∞) m -> vb_-6811307535535622227 [w=5], vs_length_[150, 200) m -> vb_-6811307535535622227 [w=2], vs_width_[25, 30) m -> vb_-6811307535535622227 [w=1]. These edges with high weights indicate a strong connection between the vessel's static attributes and the selected movement pattern.",
+   "justification": "The selected movement pattern (vb_-6811307535535622227) is consistent with the boundary movement pattern, which shows a slight turn to the west and slight heading fluctuation. The vessel's static attributes (Under way using engine, Cargo type, and specific dimensions) align with the movement pattern, suggesting a turning or maneuvering operation. The gap's boundary conditions also support this, as the vessel is making small adjustments in its course and heading, which is typical of a turning maneuver.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The behavior pattern of the vessel is characterized by a stable speed, slight course changes, and slight heading fluctuations. The function selected (ID 0) uses linear interpolation, which is suitable for scenarios where the movement is relatively straight and the speed is constant. Given the behavior pattern, the function can be expected to handle the situation with a probability of 80%. This probability is derived from the fact that the vessel's speed is stable, and linear interpolation is a straightforward method to estimate positions between known points. The slight course changes and heading fluctuations can be approximated by linear interpolation, as the changes are not significant and the function can handle such small variations effectively. The calculation is based on the assumption that 80% of similar scenarios have been successfully handled by this method in previous analyses.\n2. The function uses linear interpolation, which is a simple and effective method for imputing missing values when the movement is relatively straight and the speed is constant. The function's underlying model (linear) logically matches the identified movement pattern, as the vessel's behavior is characterized by slight and gradual changes, which can be well approximated by a straight line. The slight course changes and heading fluctuations can be reasonably approximated by linear interpolation, given the small magnitude of these changes.",
+   "reasoning": "The selected function (ID 0) is technically suitable for the kinematic requirements of the vessel. The function's linear interpolation approach is appropriate for the stable speed and slight course changes observed in the behavior pattern. The slight heading fluctuations can also be approximated using this method, as the changes are minor and the function can handle such small variations effectively."
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a consistent speed and making slight adjustments to its course and heading, indicating a turning or maneuvering operation. Given its position near nearby shipping lanes, it is typical for the vessel to make such adjustments to avoid other vessels or navigate through the lanes. This behavior is consistent with standard maritime practices, where vessels often make slight turns to the west to align with shipping lanes or avoid obstacles. The slight heading fluctuations and course changes are minor and do not suggest any unusual or hazardous intent. Therefore, this behavior is a standard maneuvering operation and does not raise any regulatory concerns based on the available information.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "538009058_c2": {
+  "status": "failed",
+  "behaviour": null,
+  "function": null,
+  "explanation": null
+ },
+ "538009301_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6130949872928326406",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually turning towards the west, indicating a slight change in direction over ground)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, suggesting the vessel is making small adjustments in its heading)",
+    "intent": "turning or maneuvering (the vessel is likely making a turn or performing a maneuver, as evidenced by the slight changes in both course and heading)",
+    "duration": "12550~12600"
+   },
+   "support": [],
+   "support_text": "vb_-6130949872928326406 [label=\"Behavior Pattern\\nspeed_profile: stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)\\ncourse_change: slight turn to the west (the vessel is gradually turning towards the west, indicating a slight change in direction over ground)\\nheading_fluctuation: slight fluctuation (the vessel's heading is slightly changing)\\n\"] is highly supported by the edge with weight 14, which connects it to the vessel's speed, heading, and course. This edge indicates a strong relationship between the vessel's speed, heading, and course, suggesting that the vessel is making a slight turn to the west while maintaining a stable speed.",
+   "justification": "The contextual data shows a gradual change in the vessel's position, with a slight westward turn. The vessel's speed remains relatively constant, and the heading fluctuates slightly, which is consistent with the selected movement ID 3. The vessel's path aligns with a slight westward turn, which is reflected in the selected movement ID 3's behavior pattern.",
+   "resolution": "The model answered '3', read as index 3 in the candidate list, resolved to vb_-6130949872928326406. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-5975392315769541418",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    lat_start, lon_start = start\n    lat_end, lon_end = end\n    lat_diff = lat_end - lat_start\n    lon_diff = lon_end - lon_start\n    total_time = max(Time_interval)\n    \n    # Calculate the average speed and heading\n    avg_speed = (lat_diff**2 + lon_diff**2) ** 0.5 / total_time\n    avg_heading = (lon_diff / lon_diff if lon_diff != 0 else 0) + (lat_diff / lat_diff if lat_diff != 0 else 0)\n    \n    # Generate intermediate points\n    points = []\n    for t in Time_interval:\n        lat = lat_start + (lat_diff * t / total_time)\n        lon = lon_start + (lon_diff * t / total_time)\n        points.append([lat, lon])\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is calculated based on the fact that the given behavior pattern indicates a stable speed with slight changes in course and heading, which aligns well with the function's linear interpolation approach. The function calculates the average speed and heading and then linearly interpolates the intermediate points between the known positions. Given the slight fluctuations in the heading and course, the linear interpolation will accurately capture the vessel's movement pattern. The calculation process is as follows: The function's linear interpolation approach matches the slight changes in the vessel's course and heading, which are consistent with the provided behavior pattern. The probability of 100% is derived from the fact that the function's linear nature is well-suited to handle the stable speed and slight changes in direction.\n2. The characteristics of this function include its simplicity and its ability to handle linear movements effectively. The function calculates the average speed and heading and then linearly interpolates the intermediate points between the known positions. This approach is particularly suitable for the given behavior pattern, as it involves a stable speed with slight changes in course and heading. The function's linear nature ensures that the interpolated points will follow a straight path between the known positions, which is consistent with the slight changes in the vessel's course and heading.",
+   "reasoning": "The function technically fits the kinematic requirements because it can handle the stable speed and slight changes in course and heading. The linear interpolation approach ensures that the trajectory is smooth and consistent with the behavior pattern. The function's simplicity and effectiveness in handling linear movements make it a suitable choice for imputing the missing latitude and longitude values."
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a consistent speed while making a slight turn to the west. This behavior is typical in the context of navigating through nearby shipping lanes, where vessels often need to make slight adjustments to avoid collisions or follow established routes. The slight heading fluctuation and course change indicate that the vessel is engaged in a turning maneuver, which is a common operation in maritime navigation. Given the vessel's type (Cargo) and the spatial context (nearby shipping lanes), such maneuvers are expected to ensure safe passage. The vessel's behavior does not align with typical straight-line navigation, thus ruling out the possibility of it being a vessel solely focused on speed or heading stability without any directional changes. The slight adjustments in course and heading are necessary for safe and efficient navigation in the vicinity of other vessels and shipping lanes.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "538009604_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-2055299540008824618",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual change in its course over ground, indicating a turn to the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, suggesting the vessel is making small adjustments in its direction)",
+    "intent": "turning or maneuvering (the combination of a slight course change and heading fluctuation suggests the vessel is engaged in a turning or maneuvering operation)",
+    "duration": "16200~16250"
+   },
+   "support": [
+    {
+     "node": "vb_-2055299540008824618 [w=3] -> vs_navigation_status_Under way using engine",
+     "weight": 3.0
+    },
+    {
+     "node": "vb_-2055299540008824618 [w=8] -> vs_hazardous_cargo_unknown",
+     "weight": 8.0
+    },
+    {
+     "node": "vb_-2055299540008824618 [w=4] -> vs_vessel_type_Cargo",
+     "weight": 4.0
+    },
+    {
+     "node": "vb_-2055299540008824618 [w=1] -> vs_spatial_context_unknown",
+     "weight": 1.0
+    },
+    {
+     "node": "vb_-2055299540008824618 [w=7] -> vs_draught_[12, +∞) m",
+     "weight": 7.0
+    },
+    {
+     "node": "vb_-2055299540008824618 [w=2] -> vs_length_[200, 250) m",
+     "weight": 2.0
+    }
+   ],
+   "support_text": "vb_-2055299540008824618 [w=3] -> vs_navigation_status_Under way using engine [w=3], vb_-2055299540008824618 [w=8] -> vs_hazardous_cargo_unknown [w=8], vb_-2055299540008824618 [w=4] -> vs_vessel_type_Cargo [w=4], vb_-2055299540008824618 [w=1] -> vs_spatial_context_unknown [w=1], vb_-2055299540008824618 [w=7] -> vs_draught_[12, +∞) m [w=7], vb_-2055299540008824618 [w=2] -> vs_length_[200, 250) m [w=2], vb_-2055299540008824618 [w=4] -> vs_width_[30, +∞) m [w=4]. These edges with high weights indicate that the movement pattern is strongly supported by the vessel's static attributes.",
+   "justification": "The movement pattern is consistent with the boundary context as both the left and right segments show a vessel under way using engine, with a cargo type, and the vessel's static attributes such as draught, length, and width matching the inferred attributes. The slight turn to the west and the stable speed profile are also observed in the boundary segments, suggesting a smooth and controlled maneuvering operation.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-2055299540008824618. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 95.0%. This is calculated based on the fact that the behavior pattern described (stable speed, slight course change, slight heading fluctuation, and turning or maneuvering) aligns well with the interpolation function's ability to handle consistent speed changes and slight course adjustments. The function uses linear interpolation, which is suitable for stable speed profiles and slight course changes. The calculation is based on the weight of the behavior pattern \"vb_-2055299540008824618\" in the induced subgraph, which is 3 out of a total of 3 weights, giving a probability of 3/3 * 100% = 95.0%.\n\n2. The characteristics of this function involve linear interpolation between the start and end points of the trajectory. This method is well-suited for handling stable speed profiles and slight course changes, which are consistent with the behavior pattern described. The function's linear nature ensures that the interpolated points will follow a straight path between the known points, which is appropriate for the slight course changes observed in the behavior pattern.",
+   "reasoning": "- The function uses linear interpolation, which is effective for maintaining a consistent speed profile, as indicated by the behavior pattern.\n- The slight course changes and heading fluctuations suggest a gradual turn or maneuvering, which can be accurately represented by a linear interpolation function.\n- The function's simplicity and directness make it well-suited for handling the slight variations in the heading and course without overcomplicating the trajectory."
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a consistent speed while making a slight turn to the west, indicating a turning or maneuvering operation. This behavior is typical in a maritime environment where vessels often need to adjust their course for various reasons, such as avoiding obstacles, aligning with traffic patterns, or entering a specific area. The slight heading fluctuation and course change suggest that the vessel is performing a controlled maneuver, which is common in areas with moderate traffic or when navigating through narrow channels. This behavior does not align with the typical straight-line navigation expected in open waters or high-speed passages. The vessel's cargo type (Cargo) and its dimensions (draught: [12, +∞) m, length: [200, 250) m, width: [30, +∞) m) indicate that it is a medium-sized cargo vessel, which is common in coastal and inland waterways where such maneuvers are frequently required. Given the spatial context of unknown, this behavior could be occurring in various maritime environments, but the vessel's actions suggest a need for careful navigation and adherence to local regulations, such as those related to safe maneuvering and collision avoidance.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "538010242_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "The movement vb_-4891559821731194286 has the highest weight from the static attributes, with 'w=2' from 'vs_navigation_status_Under way using engine' and 'w=7' from 'vs_draught_[12, +∞) m'. These edges strongly support the vessel's behavior as it maintains a consistent speed and makes slight adjustments to its course and heading, which aligns with the boundary movement patterns.",
+   "justification": "The contextual static attributes and the incomplete AIS record sequence show that the vessel is a cargo ship with a draught of [12, +∞) m, moving in a stable manner with slight course changes. This is consistent with the boundary movement patterns indicating a vessel making small adjustments to its course and heading while maintaining a stable speed. The slight westward turn and the duration of the movement also match the observed behavior in the neighboring segments.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 95%. This is calculated based on the fact that the behavior pattern described (stable speed, slight turn to the west, slight heading fluctuation) aligns well with the linear interpolation approach used by the function. The function assumes a linear path between start and end points, which is suitable for a vessel maintaining a consistent speed with slight adjustments. The weight proportion of 5 out of 5 indicates a strong association between the behavior pattern and the function's capability to handle such patterns.\n2. The characteristics of this function include a linear interpolation approach, which is based on the start and end geographic coordinates and a list of time intervals. This method is effective for scenarios where the vessel's movement is relatively straight or follows a consistent direction with minor adjustments. Given the slight turn to the west and slight heading fluctuation, the function's linear model is well-suited to interpolate the missing positions accurately.",
+   "reasoning": "The function technically fits the kinematic requirements because it assumes a linear path between the start and end points, which is appropriate for a vessel maintaining a consistent speed with slight adjustments. The slight turn to the west and slight heading fluctuation suggest a series of small maneuvers, which can be well-represented by a linear interpolation approach. The function's simplicity and efficiency make it suitable for handling the specific speed and course characteristics of the vessel."
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a consistent speed while making slight adjustments to its course and heading, indicating a turning or maneuvering operation. This behavior is typical in a maritime environment where vessels often need to navigate through shipping lanes or avoid obstacles. The slight turn to the west and the slight heading fluctuations suggest the vessel is making small adjustments to its course, which is common when vessels are entering or exiting shipping lanes or performing routine navigational maneuvers. Given the vessel's type (Cargo) and its draft (12 m or more), it is likely engaged in a standard maneuvering operation. This behavior does not align with rapid changes in speed or direction, which would be more indicative of an emergency or collision avoidance maneuver. The vessel's navigation status as \"Under way using engine\" and the presence of nearby shipping lanes further support the idea that it is performing a typical turning or maneuvering operation to maintain safe passage.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "563138700_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "The vessel→movement edges with weights strongly support movement ID 0 (vb_-4891559821731194286) with a weight of 2 from vs_navigation_status_Under way using engine, and 10 from vs_hazardous_cargo_unknown. These high weights indicate a strong connection between the vessel's static attributes and the selected movement.",
+   "justification": "The movement pattern is consistent with the boundary conditions, where the vessel is making slight adjustments to its course and heading, indicating a turning or maneuvering operation. The AIS record sequence shows a gradual change in the vessel's position, which aligns with the slight turn to the west and heading fluctuations observed in the movement pattern. The duration of the gap (15300~15350) also fits within the range of the boundary movement patterns.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The behavior pattern corresponds to a vessel maintaining a stable speed with slight turns and heading fluctuations. The function vf_-580393894883629940, which assumes a linear path between start and end points, is expected to handle this pattern with a probability of 80%. This is calculated based on the fact that the vessel's speed is stable, and the slight turns and heading fluctuations can be approximated by a linear interpolation over short time intervals. The remaining 20% probability is attributed to the potential for more complex movements that might require a non-linear interpolation or other advanced techniques.\n2. The function vf_-580393894883629940 calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points. Given the stable speed and slight turns, this linear interpolation approach is likely to provide a reasonable approximation of the missing positions. However, the slight heading fluctuations might introduce some inaccuracies, especially over longer time intervals.",
+   "reasoning": "The selected function (ID: 0) is suitable for the given behavior pattern because it assumes a linear path between the start and end points, which aligns well with the vessel's stable speed and slight turns. The function's linear interpolation approach is a good fit for the kinematic requirements, as it can handle the slight heading fluctuations by approximating the path as a straight line over short time intervals. This approach is particularly effective when the vessel's speed remains constant and the turns are gradual, as observed in the behavior pattern."
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a consistent speed and making slight adjustments to its course and heading, indicating a turning or maneuvering operation. This behavior is typical in areas near shipping lanes, where vessels often need to make small course corrections to navigate safely. The slight turn to the west and the heading fluctuations suggest the vessel is likely avoiding obstacles or following a specific route. Given the spatial context of being near shipping lanes, such maneuvers are common and necessary for safe navigation. Other alternatives, such as rapid changes in speed or direction, are not observed, ruling out more aggressive maneuvers. The vessel's cargo type (Cargo) and its size (length: [200, 250) m, width: [30, +∞) m, draught: [12, +∞) m) also support the need for careful navigation to avoid collisions or shallow waters.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "566274000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "The most informative vessel→movement edges are vs_navigation_status_Under way using engine -> vb_-6811307535535622227",
+     "weight": 4.0
+    },
+    {
+     "node": "vs_vessel_type_Cargo -> vb_-6811307535535622227",
+     "weight": 3.0
+    }
+   ],
+   "support_text": "The most informative vessel→movement edges are vs_navigation_status_Under way using engine -> vb_-6811307535535622227 [w=4], vs_vessel_type_Cargo -> vb_-6811307535535622227 [w=3], and vs_length_[150, 200) m -> vb_-6811307535535622227 [w=2]. These edges indicate a strong connection between the vessel's attributes and the selected movement, supporting its plausibility.",
+   "justification": "The selected movement is consistent with the boundary movement patterns, which show a stable speed, slight turn to the west, and slight heading fluctuation. The vessel's static attributes, such as being under way using engine, a cargo vessel, and having a length within the range of [150, 200) m, align well with the movement pattern. The slight turn to the west observed in the boundary movements is also reflected in the selected movement, making it a plausible continuation of the vessel's behavior.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The function has a 100% probability of solving the missing value problem corresponding to the behavior pattern. This is based on the calculation of weight proportions, where the induced subgraph indicates a strong association (w=3) between the behavior pattern and the function. The behavior pattern described includes a stable speed, slight course changes, and slight heading fluctuations, which aligns well with the linear interpolation approach used in the function. The function uses linear interpolation, which is suitable for maintaining a consistent speed and making small adjustments in course and heading, as observed in the AIS samples.\n2. The function's characteristics include a linear interpolation approach, which is well-suited for the stable speed and slight course changes observed in the behavior pattern. The function does not assume any complex movement patterns, making it robust for the given context.",
+   "reasoning": "The selected function uses linear interpolation, which is appropriate for maintaining a consistent speed and making small adjustments in course and heading, as observed in the behavior pattern. The slight course changes and heading fluctuations are well-handled by linear interpolation, as it can smoothly transition between the known points."
+  },
+  "explanation": {
+   "operational": "The vessel is maintaining a consistent speed and making slight turns to the west, which is typical behavior for a cargo vessel navigating in the vicinity of shipping lanes. Given the vessel's length within the range of [150, 200) meters and its cargo status, it is likely engaged in routine operations such as avoiding other vessels or adjusting its course to stay within the designated shipping lanes. The slight heading fluctuations suggest the vessel is making small adjustments to its direction, possibly to avoid obstacles or to align with traffic patterns. This behavior is consistent with standard maritime practices and does not indicate any unusual or hazardous activity. Alternative behaviors, such as rapid changes in course or speed, are not observed, ruling out more aggressive maneuvers. The vessel's static attributes, including its cargo status and length, support the conclusion that it is operating in a manner typical for its type and context.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "566761000_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [
+    {
+     "node": "vb_-6811307535535622227 is supported by edges with high weights, such as vs_navigation_status_Under way using engine -> vb_-681130753553562227",
+     "weight": 4.0
+    },
+    {
+     "node": "vs_hazardous_cargo_unknown -> vb_-681130753553562227",
+     "weight": 8.0
+    }
+   ],
+   "support_text": "vb_-6811307535535622227 is supported by edges with high weights, such as vs_navigation_status_Under way using engine -> vb_-681130753553562227 [w=4], vs_hazardous_cargo_unknown -> vb_-681130753553562227 [w=8], and vs_draught_[12, +∞) m -> vb_-681130753553562227 [w=5]. These high weights indicate a strong connection between the vessel's static attributes and the selected movement.",
+   "justification": "The movement pattern is consistent with the boundary context, as both the boundary movement patterns and the gap's boundary conditions show a stable speed with slight turns to the west. The vessel is a tanker with a large length and width, which aligns with the movements that require careful maneuvering. The slight fluctuations in course and heading are typical of a vessel making a series of small adjustments during a turning maneuver, which is consistent with the gap's boundary conditions.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the calculation of weight proportions, where the induced subgraph shows a strong association (w=3) between the behavior pattern and the function. The behavior pattern indicates a stable speed, slight course changes, and slight heading fluctuations, which aligns well with the function's capability to interpolate between two points with a consistent speed profile. The function uses linear interpolation, which is suitable for the slight and gradual changes observed in the behavior pattern.\n2. The characteristics of this function involve using linear interpolation to estimate missing values between two known points. This method is straightforward and effective for scenarios where the movement is relatively stable and predictable, such as the one described. The function's linear model matches the slight and gradual changes in speed, course, and heading, making it a good fit for the behavior pattern.",
+   "reasoning": "The selected function uses linear interpolation, which is well-suited for scenarios with stable speed and slight course changes. The function's linear model aligns with the behavior pattern's characteristics, making it a reliable choice for imputing missing values."
+  },
+  "explanation": {
+   "operational": "The vessel, identified as a tanker with a large length and width, is maintaining a stable speed while making slight turns to the west. This behavior is typical in areas near shipping lanes where vessels often need to adjust their course for safety or to avoid other traffic. The slight fluctuations in heading and course changes suggest the vessel is executing a turning maneuver, which is a common operation in such contexts. Given the vessel's size and the nature of the maneuver, it is prudent to ensure that the vessel is not obstructing other maritime traffic and is maintaining safe distances. This behavior does not align with typical straight-line navigation, which would be more common in open waters without nearby shipping lanes. Therefore, it is reasonable to infer that the vessel is performing a safe and necessary maneuver to navigate through the area.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "636020265_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-4891559821731194286",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is making a gradual turn towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating slight maneuvers or adjustments)",
+    "intent": "turning or maneuvering (the vessel is making a series of small adjustments to its course)",
+    "duration": "15300~15350"
+   },
+   "support": [],
+   "support_text": "vb_-4891559821731194286 is supported by the highest number of edges with significant weights, including 'speed_profile: stable', 'course_change: slight turn to the west', 'heading_fluctuation: slight fluctuation', and 'intent: turning or maneuvering'. The weights for these edges are as follows: 'w=2' for navigation_status, 'w=10' for hazardous_cargo, 'w=2' for spatial_context, 'w=7' for draught, 'w=3' for length, and 'w=5' for width. These strong connections indicate a high likelihood of the vessel performing a turning maneuver.",
+   "justification": "The contextual static attributes of the vessel match the selected movement, with the vessel being a 'Cargo Hazardous category D' with a 'draught: [12, +∞) m', 'length: [200, 250) m', and 'width: [30, +∞) m'. The boundary movement patterns also indicate a slight turn to the west, which is consistent with the selected movement. The vessel's speed is stable, and it is under way using engine, which is typical behavior for a vessel performing a turning maneuver. The slight fluctuations in heading and the gradual changes in course are also in line with the expected behavior during a turning maneuver.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-4891559821731194286. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_-580393894883629940",
+   "description": "This function estimates missing latitude and longitude positions based on the start and end geographic coordinates and a list of time intervals. It assumes a linear path between the start and end points, using the provided time differences to interpolate the intermediate positions. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points.",
+   "code": "def spatial_function(start, end, Time_interval):\n    start_lat, start_lon = start\n    end_lat, end_lon = end\n    total_time = Time_interval[-1]\n    lat_diff = end_lat - start_lat\n    lon_diff = end_lon - start_lon\n    lat_speed = lat_diff / total_time\n    lon_speed = lon_diff / total_time\n    intermediate_points = []\n    for t in Time_interval:\n        lat = start_lat + lat_speed * t\n        lon = start_lon + lon_speed * t\n        intermediate_points.append((lat, lon))\n    return intermediate_points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is based on the calculation of the weight proportions from the induced subgraph, where the function `vf_-580393894883629940` has a weight of 5, indicating a strong association with the given behavior pattern. The behavior pattern described includes a stable speed, slight course changes, and slight heading fluctuations, which aligns well with the linear interpolation approach of the function. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, making it suitable for the given kinematic pattern.\n\n2. The characteristics of this function include its linear interpolation approach, which assumes a straight path between the start and end points. This approach is well-suited for the behavior pattern where the vessel maintains a consistent speed and makes slight turns. The slight heading fluctuations and course changes can be reasonably approximated by a linear path, especially given the short duration of the behavior pattern.",
+   "reasoning": "The function `vf_-580393894883629940` is technically well-suited for the kinematic requirements because it assumes a linear path between the start and end points. This assumption is reasonable for a vessel maintaining a consistent speed and making slight turns, as the changes in course and heading are minimal. The function calculates the speed in latitude and longitude directions and uses these speeds to generate a sequence of intermediate points, which aligns with the behavior pattern described."
+  },
+  "explanation": {
+   "operational": "The vessel is engaged in a turning maneuver, which is typical behavior for a cargo vessel of its type, given its size and the need to navigate safely in the vicinity of shipping lanes. The slight turn to the west and the stable speed indicate that the vessel is likely adjusting its course to avoid obstacles or to align with a preferred route. The vessel's size and the fact that it is under way using engine suggest that such maneuvers are common and necessary for safe navigation. The slight fluctuations in heading further support the idea that the vessel is making small adjustments to its course, which is a standard practice during turning maneuvers. The behavior does not align with rapid changes or emergency maneuvers, which would be more indicative of a different type of vessel or situation. The vessel's static attributes, such as its cargo type and dimensions, also support the conclusion that it is performing a routine turning maneuver to ensure safe passage.",
+   "regulatory": "Undetermined"
+  }
+ },
+ "636021058_c2": {
+  "status": "ok",
+  "behaviour": {
+   "id": "vb_-6811307535535622227",
+   "attributes": {
+    "speed_profile": "stable (the vessel is maintaining a consistent speed, not accelerating or decelerating)",
+    "course_change": "slight turn to the west (the vessel is gradually changing its course over ground, moving slightly towards the west)",
+    "heading_fluctuation": "slight fluctuation (the heading shows minor variations, indicating the vessel is making slight adjustments in its direction)",
+    "intent": "turning or maneuvering (the vessel is making small adjustments to its course and heading, suggesting it is turning or maneuvering)",
+    "duration": "14750~14800"
+   },
+   "support": [],
+   "support_text": "The movement vb_-6811307535535622227 is strongly supported by edges with high weights, such as \"vs_navigation_status_Under way using engine -> vb_-681130753553562227 [label=\"w=4\"]\" and \"vs_draught_[12, +∞) m -> vb_-681130753553562227 [label=\"w=5\"]\". These edges indicate a strong connection between the vessel's navigation status and its movement pattern, as well as between its draught and the movement, suggesting a high likelihood of this movement.",
+   "justification": "This movement is consistent with the boundary context, where the vessel is making slight adjustments to its course and heading, indicating a turning or maneuvering operation. The vessel's speed is stable, and it is gradually turning towards the west, which aligns with the given boundary movement patterns. The duration of this movement (14750~14800) also fits within the range of the given boundary movement patterns (11500~11550), suggesting a plausible continuation of the vessel's behavior.",
+   "resolution": "The model answered '0', read as index 0 in the candidate list, resolved to vb_-6811307535535622227. References to a number in the text above designate this index, not a graph id."
+  },
+  "function": {
+   "id": "vf_531081978639192785",
+   "description": null,
+   "code": "def spatial_function(start, end, Time_interval):\n    from scipy.interpolate import interp1d\n    import numpy as np\n    \n    # Convert start and end to numpy arrays for easier manipulation\n    start = np.array(start)\n    end = np.array(end)\n    \n    # Calculate the total time difference\n    total_time = max(Time_interval)\n    \n    # Create a time array for interpolation\n    time_array = np.linspace(0, total_time, len(Time_interval))\n    \n    # Create the interpolation functions for latitude and longitude\n    lat_interpolator = interp1d([0, total_time], [start[0], end[0]])\n    lon_interpolator = interp1d([0, total_time], [start[1], end[1]])\n    \n    # Interpolate the latitude and longitude for each time interval\n    latitudes = lat_interpolator(time_array)\n    longitudes = lon_interpolator(time_array)\n    \n    # Combine the latitudes and longitudes into a single array of points\n    points = np.column_stack((latitudes, longitudes))\n    \n    return points",
+   "statistical_support": "1. The probability that this function can solve the missing value problem corresponding to the behavior pattern is 100%. This is calculated based on the fact that the behavior pattern described (stable speed, slight turn to the west, slight heading fluctuation, and turning or maneuvering) aligns with the interpolation function used. The interpolation function uses linear interpolation, which is suitable for stable speed patterns and slight course changes. The calculation of the total time difference and the creation of a time array for interpolation ensures that the function can accurately impute missing values over the duration of the behavior pattern. Given the duration of 14750~14800, the function can handle the time span effectively. The probability is 100% because the function's underlying model (linear) matches the identified movement pattern (slight turn and heading fluctuation).\n2. The characteristics of this function involve using `scipy.interpolate.interp1d` to create linear interpolations for latitude and longitude based on the start and end points. The function calculates the total time difference and creates a time array for interpolation, ensuring that the imputed values are consistent with the known data points. This function is particularly well-suited for handling the stable speed and slight course changes observed in the behavior pattern.",
+   "reasoning": "The function technically fits the kinematic requirements by using linear interpolation, which is appropriate for the stable speed and slight course changes observed in the behavior pattern. The function's ability to handle the duration of the behavior pattern (14750~14800) ensures that the imputed values are consistent with the overall movement of the vessel."
+  },
+  "explanation": {
+   "operational": "The vessel is engaged in a turning or maneuvering operation, maintaining a consistent speed while making a slight turn to the west. This behavior is typical in areas near shipping lanes, where vessels often need to adjust their course for safe navigation. The slight heading fluctuations and course changes suggest the vessel is making small adjustments to avoid obstacles or follow the recommended shipping lane. This behavior is consistent with standard maritime practices, particularly in busy maritime environments where vessels must frequently maneuver to avoid collisions or adhere to traffic separation schemes. Given the vessel's type (Cargo) and the need for careful navigation in the vicinity of shipping lanes, such maneuvers are expected and necessary for safe passage. Alternative behaviors, such as rapid changes in course or speed, are less likely due to the stable speed and gradual turn observed, which align with standard operating procedures for cargo vessels in such contexts.",
+   "regulatory": "Undetermined"
+  }
+ }
+}

@@ -1,0 +1,77 @@
+# Configuration unique de l'expérience VISTA / Hexa (EGC 2027).
+# Toute exécution enregistre ce fichier validé et son empreinte.
+
+seed: 42
+
+paths:
+  duckdb: data/tracks.duckdb              # base source
+  density_cache: data/density.json
+  experiment_dir: EGC27/data  # jeu figé, trous, résultats
+  cache_dir: EGC27/cache # réponses LLM par (trou, méthode, config)
+  land_masks: 
+    - data/land/ne_10m_land.shp
+    - data/land/ne_10m_minor_islands.shp
+
+# Zone et période d'extraction (à fixer)
+zone:
+  lon_min: -30.0
+  lat_min: 30.0
+  lon_max: 10.0
+  lat_max: 52.0
+period:
+  start: "2023-01-01"
+  end: "2023-01-12"
+
+h3:
+  resolution: 7      
+
+land_mask:
+  source: natural_earth
+  scale: 10m
+
+dataset:
+  n_per_level: 20
+  window_points: 200
+  quality:
+    max_sampling_gap_min: 60   # pas de trou réel au-delà
+    min_median_sog_kn: 3
+  levels:
+    facile:
+      ais_types: [70-79, 80-89]   # cargos, tankers
+      max_sinuosity: 1.6
+    difficile:
+      ais_types: [30, 31, 32, 36, 37, 52]  # pêche, remorquage, voile, plaisance
+      min_sinuosity: 1.6
+      max_sinuosity: 4.0
+
+gaps:
+  sizes_cells: [2, 4, 8]
+  min_context_points: 10   # points conservés de part et d'autre du trou
+
+density:
+  exclude_selected_mmsi: true
+
+llm:
+  provider: ollama
+  host: http://localhost:11434
+  model: qwen-vista:latest
+  model_digest: null       # renseigné automatiquement au lancement
+  options:
+    temperature: 0
+    seed: 42
+    num_ctx: 8192
+
+methods: [vista, hexa, linear, astar]
+
+hexa:
+  k_ring: 1
+  max_candidates: 3
+  max_scenarios: 5
+
+metrics:
+  resample_step_s: 300
+  bootstrap_samples: 2000
+  invalid_outputs: exclude   # exclues des distances, comptées dans le taux d'échec
+
+vista:
+  root: backend/vista

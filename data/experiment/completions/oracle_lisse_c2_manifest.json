@@ -1,0 +1,11 @@
+{
+  "method": "oracle_lisse",
+  "size_cells": 2,
+  "config_hash": "20b726158a10",
+  "params": {
+    "smoothing_iterations": 2
+  },
+  "gaps": 40,
+  "ok": 40,
+  "created_at": "2026-10-19T09:35:49.690199+00:00"
+}
